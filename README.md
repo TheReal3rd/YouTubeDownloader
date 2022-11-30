@@ -1,14 +1,14 @@
-<p align="center"> <b> YTDL </b> </p>
+<p align="center"> <b> YouTube Downloader </b> </p>
 
 <p align="center">
-<img src="src/main/resources/logo.jpg" width="128"/>
+<img src="src/main/resources/Logo.png" width="128"/>
 </p>
 
 <p align="center"> <b> <a href="/releases"> Releases </a> </b> </p>
 
 <p align="center"> <b> Description </b> </p>
 <p> Mass Download YouTube video and convert them into desired formats. </p>
-<p> For personal use any issues will be looked into but you should expect me fixing anything. </p>
+<p> For personal use any issues will be looked into but you shouldn't expect me fixing anything. </p>
 
 <p align="center"> <b> TODO: </b> </p>
 <p> 1. Convert or integrate YouTube-DL directly into project. </p>
