@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/DownloadProgressCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/mapper/HttpHeader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/mapper/VideoFormat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/mapper/VideoInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/mapper/VideoSubtitle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/mapper/VideoThumbnail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/utils/StreamGobbler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/utils/StreamProcessExtractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/CommandManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/DownloadRunnable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/FrameManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/logo.jpg" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IBsjTsvmETm739DVzJB3H6SANk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/media/Disk2/Programing/Java/YouTube Downloader/Program/YoutubeDownloader/src/main/resources",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="me.third.right.YTDL.Main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.third.right.YTDL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="" />
+      <created>1669666445680</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669666445680</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
