@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Hello, World!">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Logo.png" afterDir="false" />
+    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and improvements.">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/CommandManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/youtube-dl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/CommandManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/DownloadRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/runnables/DownloadRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/FrameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/JFrameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/YTDL/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,29 +51,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/media/Disk2/Programing/Java/YouTube Downloader/Program/YoutubeDownloader/src/main/resources",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/media/Disk2/Programing/Java/YouTube Downloader/Program/YoutubeDownloader/src/main/java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2627824&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/me.third.right/manager" />
+      <recent name="$PROJECT_DIR$/src/main/resources/me.third.right/YTDL/manager" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+    <configuration name="YTDL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/azul-17.0.5" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="me.third.right.YTDL.Main" />
+      <option name="MAIN_CLASS_NAME" value="me.third.right.youtubedl.YTDL" />
+      <module name="YouTubeDownloader.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="me.third.right.YTDL.*" />
+          <option name="PATTERN" value="me.third.right.youtubedl.runnables.*" />
           <option name="ENABLED" value="true" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.*" />
+          <option name="ENABLED" value="false" />
         </pattern>
       </extension>
       <method v="2">
@@ -70,7 +95,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.me.third.right.youtubedl.YTDL" />
       </list>
     </recent_temporary>
   </component>
@@ -90,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669799450180</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixes and improvements.">
+      <created>1669843790091</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669843790091</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -106,6 +138,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Hello, World!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hello, World!" />
+    <MESSAGE value="Fixes and improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes and improvements." />
   </component>
 </project>

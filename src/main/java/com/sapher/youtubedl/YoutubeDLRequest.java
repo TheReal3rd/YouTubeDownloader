@@ -1,8 +1,5 @@
 package com.sapher.youtubedl;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,29 +9,52 @@ import java.util.Map;
  */
 public class YoutubeDLRequest {
 
-    /**
-     * Executable working directory
-     */
-    @Getter @Setter
+
     private String directory;
 
-    /**
-     * Video Url
-     */
-    @Getter @Setter
     private String url;
 
-    /**
-     * List of executable options
-     */
-    @Getter
     private final Map<String, String> options = new HashMap<String, String>();
 
-    @Getter @Setter
     private boolean extractAudio = false;
 
-    @Getter @Setter
     private String format = null;
+
+    public String getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public boolean isExtractAudio() {
+        return extractAudio;
+    }
+
+    public void setExtractAudio(boolean extractAudio) {
+        this.extractAudio = extractAudio;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public Map<String, String> getOptions() {
+        return options;
+    }
 
     public void setOption(String key) {
         options.put(key, null);

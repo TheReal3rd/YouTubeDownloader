@@ -1,15 +1,13 @@
-package me.third.right.YTDL;
+package me.third.right.youtubedl.runnables;
 
 import com.sapher.youtubedl.YoutubeDL;
 import com.sapher.youtubedl.YoutubeDLException;
 import com.sapher.youtubedl.YoutubeDLRequest;
 import com.sapher.youtubedl.YoutubeDLResponse;
-import lombok.Getter;
-import lombok.Setter;
+import me.third.right.youtubedl.manager.JFrameManager;
 
 public class DownloadRunnable implements Runnable {
 
-    @Getter @Setter
     boolean stopping = false;
 
     private final boolean extractAudio;
@@ -25,7 +23,8 @@ public class DownloadRunnable implements Runnable {
 
     @Override
     public void run() {
-        for(String s : links) {
+        for(int i = 0; i != links.length; i++) {
+            final String s = links[i];
             if(stopping) {
                 break;
             }
@@ -34,19 +33,21 @@ public class DownloadRunnable implements Runnable {
             try {
                 // Build request
                 YoutubeDLRequest request = new YoutubeDLRequest(text);
+                request.setDirectory(System.getProperty("user.dir"));
                 request.setExtractAudio(extractAudio);
                 request.setFormat(format);
                 request.setOption("ignore-errors");
                 request.setOption("retries", 10);
 
-                if (FrameManager.INSTANCE.getDownloadPlaylists().isSelected()) {
+                if (JFrameManager.INSTANCE.getDownloadPlaylists().isSelected()) {
                     request.setOption("yes-playlist");
                 } else {
                     request.setOption("no-playlist");
                 }
 
                 // Make request and return response
-                YoutubeDLResponse response = YoutubeDL.execute(request, (progress, etaInSeconds) -> FrameManager.INSTANCE.setProgress(progress));
+                int finalI = i;
+                YoutubeDLResponse response = YoutubeDL.execute(request, (progress, etaInSeconds) -> JFrameManager.INSTANCE.setProgress(progress, links.length, finalI));
 
                 // Response
                 String stdOut = response.getOut(); // Executable output
@@ -57,4 +58,11 @@ public class DownloadRunnable implements Runnable {
         }
     }
 
+    public void setStopping(boolean stopping) {
+        this.stopping = stopping;
+    }
+
+    public boolean isStopping() {
+        return stopping;
+    }
 }

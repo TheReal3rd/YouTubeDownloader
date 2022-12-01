@@ -3,7 +3,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version ("7.0.0")
 }
 
-group 'me.third.right.YTDL'
+group 'me.third.right.youtubedl'
 version '1.0'
 
 repositories {
@@ -11,11 +11,18 @@ repositories {
     mavenCentral()
 }
 
+sourceCompatibility = '17'
+targetCompatibility = '17'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 sourceSets {
     all {
         dependencies {
             implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.1'
             implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+
             //Lombok
             compileOnly 'org.projectlombok:lombok:1.18.20'
             annotationProcessor 'org.projectlombok:lombok:1.18.20'
@@ -25,7 +32,7 @@ sourceSets {
 
 tasks.jar {
     manifest {
-        attributes("Main-Class": "me.third.right.YTDL.Main")
+        attributes("Main-Class": "me.third.right.youtubedl.YTDL")
     }
 
     finalizedBy("shadowJar")

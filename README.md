@@ -10,10 +10,12 @@
 <p> Mass Download YouTube video and convert them into desired formats. </p>
 <p> For personal use any issues will be looked into but you shouldn't expect me fixing anything. </p>
 
+<p align="center"> <b> Usage: </b> </p>
+<p> 1. I advise installing FFmpeg most features wont work else. </p>
+<p> 2. . </p>
+
 <p align="center"> <b> TODO: </b> </p>
-<p> 1. Convert or integrate YouTube-DL directly into project. </p>
-<p> 2. Rewrite GUI in JavaFX or another GUI system. </p>
-<p> 3. Make the program work on Windows / Test it. </p>
+<p> 1. Make the program work on Windows / Test it. </p>
 
 <details>
 <summary> Libs: </summary>
@@ -22,4 +24,5 @@
 
 <p> <a href="https://projectlombok.org/"> 2.Lombok </a> </p>
 
+<p> <a href="https://github.com/ytdl-org/youtube-dl"> 3.YouTube-dl </a> </p>
 </details>
