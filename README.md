@@ -4,7 +4,7 @@
 <img src="src/main/resources/Logo.png" width="128"/>
 </p>
 
-<p align="center"> <b> <a href="/releases"> Releases </a> </b> </p>
+<p align="center"> <b> <a href="https://github.com/TheReal3rd/YouTubeDownloader/releases"> Releases </a> </b> </p>
 
 <p align="center"> <b> Description </b> </p>
 <p> Mass Download YouTube video and convert them into desired formats. </p>
