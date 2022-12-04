@@ -1,34 +1,42 @@
 package me.third.right.youtubedl.manager;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class JFrameManager {
     public static JFrameManager INSTANCE;
 
-    private final JFrame frame;
+    @Getter private final JFrame frame;
 
-    private final JButton start;
-    private final JButton cancel;
-    private final JButton clear;
+    @Getter private final JButton start;
+    @Getter private final JButton cancel;
+    @Getter private final JButton clear;
+    @Getter private final JButton fileSelect;
 
-    private final JLabel progress;
+    @Getter private final JLabel progress;
 
-    private final JTextArea links;
+    @Getter private final JTextArea links;
 
-    private final JCheckBox downloadPlaylists;
+    @Getter private final JCheckBox downloadPlaylists;
 
-    private final JCheckBox extractAudio;
-    private final String[] videoFormats = new String[] { "MP4", "MKV" };
-    private final JComboBox<String> videoFormat;
-    private final String[] audioFormats = new String[] { "MP3", "M4A" };
-    private final JComboBox<String> audioFormat;
+    @Getter private final JCheckBox extractAudio;
+    @Getter private final String[] videoFormats = new String[] { "MP4", "MKV" };
+    @Getter private final JComboBox<String> videoFormat;
+    @Getter private final String[] audioFormats = new String[] { "MP3", "M4A" };
+    @Getter private final JComboBox<String> audioFormat;
 
-    private final JButton debug;
+    @Getter private final FileSelectFrame fileSelectFrame = new FileSelectFrame();
 
     public JFrameManager() {
-        frame = new JFrame(" YTDL V1 ");
+        frame = new JFrame("YouTube Downloader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel secondPanel = new JPanel();
@@ -45,16 +53,24 @@ public class JFrameManager {
         secondPanel.add(topPanel);
 
         links = new JTextArea();
-        links.setPreferredSize(new Dimension(921, 441));
         links.setBackground(Color.LIGHT_GRAY);
-        links.setCaretColor(Color.MAGENTA);
-        topPanel.add(links);
+
+        JScrollPane scrollPane = new JScrollPane(links);
+        scrollPane.setPreferredSize(new Dimension(921, 441));
+        topPanel.add(scrollPane);
 
         // Button Area
 
+        clear = new JButton("CLEAR");
+        clear.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        clear.setPreferredSize(new  Dimension(80, 30));
+        clear.setBackground(Color.LIGHT_GRAY);
+        clear.addActionListener(X -> links.setText(""));
+        secondPanel.add(clear);
+
         start = new JButton("START");
         start.setLayout(new FlowLayout(FlowLayout.LEFT));
-        start.setPreferredSize(new  Dimension(90, 40));
+        start.setPreferredSize(new  Dimension(80, 30));
         start.setBackground(Color.LIGHT_GRAY);
         start.addActionListener(X -> {
             final boolean extractAudio = getExtractAudio().isSelected();
@@ -65,19 +81,17 @@ public class JFrameManager {
 
         cancel = new JButton("CANCEL");
         cancel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        cancel.setPreferredSize(new  Dimension(90, 40));
+        cancel.setPreferredSize(new  Dimension(90, 30));
         cancel.setBackground(Color.LIGHT_GRAY);
-        cancel.addActionListener(X -> {
-            CommandManager.INSTANCE.stopDownload();
-        });
+        cancel.addActionListener(X -> CommandManager.INSTANCE.stopDownload());
         secondPanel.add(cancel);
 
-        clear = new JButton("CLEAR");
-        clear.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        clear.setPreferredSize(new  Dimension(90, 40));
-        clear.setBackground(Color.LIGHT_GRAY);
-        clear.addActionListener(X -> links.setText(""));
-        secondPanel.add(clear);
+        fileSelect = new JButton("File");
+        fileSelect.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        fileSelect.setPreferredSize(new  Dimension(60, 30));
+        fileSelect.setBackground(Color.LIGHT_GRAY);
+        fileSelect.addActionListener(X -> fileSelectFrame.setVisible(!fileSelectFrame.isVisible()));
+        secondPanel.add(fileSelect);
 
         // Dropdown Area
 
@@ -112,17 +126,9 @@ public class JFrameManager {
         progress.setBackground(Color.BLACK);
         secondPanel.add(progress);
 
-        //Debug
-
-        debug = new JButton("Debug");
-        debug.addActionListener(X -> {
-
-        });
-        //secondPanel.add(debug);
-
         // Frame END
         frame.pack();
-        frame.setSize(960, 540);
+        frame.setSize(960, 520);
         frame.setResizable(false);
         frame.setVisible(true);
     }
@@ -131,19 +137,24 @@ public class JFrameManager {
         progress.setText("Progress: %.1f%% %d/%d".formatted(progressF, index, size));
     }
 
-    public JCheckBox getExtractAudio() {
-        return extractAudio;
-    }
+    public void loadFile(File file) {
+        final StringBuilder messages = new StringBuilder();
+        final InputStream stream;
+        try {
+            stream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
 
-    public JComboBox<String> getAudioFormat() {
-        return audioFormat;
-    }
+        final Scanner scanner = new Scanner(stream);
+        while(scanner.hasNextLine()) {
+            final String line = scanner.nextLine();
+            if(line.isEmpty()) continue;
+            messages.append(line).append("\n");
+        }
 
-    public JComboBox<String> getVideoFormat() {
-        return videoFormat;
-    }
-
-    public JCheckBox getDownloadPlaylists() {
-        return downloadPlaylists;
+        scanner.close();
+        getLinks().setText(messages.toString());
     }
 }

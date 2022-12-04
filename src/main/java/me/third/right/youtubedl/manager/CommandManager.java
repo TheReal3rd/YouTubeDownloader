@@ -31,9 +31,11 @@ public class CommandManager {
     }
 
     public void stopDownload() {
-        downloading = false;
-        downloadRunnable.setStopping(true);
-        thread.interrupt();
+        if(downloading) {
+            downloading = false;
+            downloadRunnable.setStopping(true);
+            thread.interrupt();
+        }
     }
 
     private void extractTools() {
