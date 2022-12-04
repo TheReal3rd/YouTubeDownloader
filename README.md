@@ -11,8 +11,7 @@
 <p> For personal use any issues will be looked into but you shouldn't expect me fixing anything. </p>
 
 <p align="center"> <b> Usage: </b> </p>
-<p> 1. I advise installing FFmpeg most features wont work else. </p>
-<p> 2. . </p>
+<p> I advise installing FFmpeg most features wont work else. </p>
 
 <p align="center"> <b> TODO: </b> </p>
 <p> 1. Make the program work on Windows / Test it. </p>
