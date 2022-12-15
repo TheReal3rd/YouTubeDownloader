@@ -1,0 +1,1 @@
+gradlew build -Dorg.gradle.java.home="c:/Program Files/Java/jdk-17.0.5"

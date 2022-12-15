@@ -8,17 +8,19 @@
 
 <p align="center"> <b> Description </b> </p>
 <p> Mass Download YouTube video and convert them into desired formats. </p>
-<p> For personal use any issues will be looked into but you shouldn't expect me fixing anything. </p>
+<p> For personal use any issues will be looked into, but you shouldn't expect me fixing anything. </p>
 
 <p align="center"> <b> Usage: </b> </p>
-<p> I advise installing FFmpeg most features wont work else. </p>
+<p> Requires FFmpeg to be installed. </p>
+<p> Requires Python to be installed. (Use the AppStore versions.) </p>
 
 <p align="center"> <b> TODO: </b> </p>
-<p> 1. Make the program work on Windows / Test it. </p>
+<p> 1. Windows issues: Python + YT-DL have difficulties finding each other may try using Python Portable and run it from there or even add path select. </p>
+<p> 2. Windows issues: Need to Test and possibly fix ffmpeg haven't found a installer only portable version. </p>
+<p> 3. Windows: Add to compiler jar to exe packer. </p>
 
 <details>
 <summary> Libs: </summary>
-
 <p> <a href="https://github.com/sapher/youtubedl-java"> 1.YouTubeDL-Java </a> </p>
 
 <p> <a href="https://projectlombok.org/"> 2.Lombok </a> </p>

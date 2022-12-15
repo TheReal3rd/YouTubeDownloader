@@ -35,8 +35,10 @@ public class JFrameManager {
 
     @Getter private final FileSelectFrame fileSelectFrame = new FileSelectFrame();
 
+    @Getter private final ErrorFrame errorFrame = new ErrorFrame();
+
     public JFrameManager() {
-        frame = new JFrame("YouTube Downloader");
+        frame = new JFrame("YouTube Downloader V1.1");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel secondPanel = new JPanel();

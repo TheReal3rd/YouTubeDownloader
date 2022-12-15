@@ -4,6 +4,8 @@ import com.sapher.youtubedl.YoutubeDL;
 import com.sapher.youtubedl.YoutubeDLException;
 import com.sapher.youtubedl.YoutubeDLRequest;
 import com.sapher.youtubedl.YoutubeDLResponse;
+import me.third.right.youtubedl.YTDL;
+import me.third.right.youtubedl.manager.ErrorFrame;
 import me.third.right.youtubedl.manager.JFrameManager;
 
 public class DownloadRunnable implements Runnable {
@@ -53,7 +55,13 @@ public class DownloadRunnable implements Runnable {
                 String stdOut = response.getOut(); // Executable output
                 System.out.println(stdOut);
             } catch (YoutubeDLException e) {
+                //Print stack anyway.
                 e.printStackTrace();
+
+                //We display custom error message with detail on the issue.
+                ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
+                frame.setError(e);
+                frame.setVisible(true);
             }
         }
     }
