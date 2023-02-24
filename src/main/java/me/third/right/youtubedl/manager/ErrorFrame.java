@@ -1,8 +1,6 @@
 package me.third.right.youtubedl.manager;
 
-import com.sapher.youtubedl.YoutubeDLException;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +8,6 @@ import java.awt.*;
 public class ErrorFrame {
 
     @Getter private final JFrame frame;
-
-    @Getter
-    private YoutubeDLException error = null;
 
     private final JTextArea message;
 
@@ -40,9 +35,8 @@ public class ErrorFrame {
         frame.setVisible(false);
     }
 
-    public void setError(YoutubeDLException error) {
-        this.error = error;
-        message.setText(error.getMessage());
+    public void setError(String error) {
+        message.setText(error);
     }
 
     public void setVisible(boolean visible) {

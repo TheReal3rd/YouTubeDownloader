@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.nio.file.Paths;
 
+import static me.third.right.youtubedl.utils.Utils.loadTextFile;
+
 public class FileSelectFrame {
 
     @Getter private final JFrame frame;
@@ -34,7 +36,7 @@ public class FileSelectFrame {
             public void actionPerformed(ActionEvent e) {
                 switch (e.getActionCommand()) {
                     case "ApproveSelection" -> {
-                        JFrameManager.INSTANCE.loadFile( fileChooser.getSelectedFile());
+                        JFrameManager.INSTANCE.getLinks().setText(loadTextFile( fileChooser.getSelectedFile()));
                         setVisible(false);
                     }
                     case "CancelSelection" -> {

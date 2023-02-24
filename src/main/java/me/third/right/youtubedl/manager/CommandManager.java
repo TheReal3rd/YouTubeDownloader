@@ -1,10 +1,10 @@
 package me.third.right.youtubedl.manager;
 
-import me.third.right.youtubedl.runnables.DownloadRunnable;
+import me.third.right.youtubedl.runnables.DownloaderRunnable;
+import me.third.right.youtubedl.utils.FormatEnum;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import static me.third.right.youtubedl.utils.Utils.downloaderCheck;
+import static me.third.right.youtubedl.utils.Utils.ffmpegCheck;
 
 public class CommandManager {
     // https://github.com/sapher/youtubedl-java
@@ -16,45 +16,35 @@ public class CommandManager {
 
     private Thread thread;
 
-    private DownloadRunnable downloadRunnable;
+    private DownloaderRunnable downloaderRunnable;
 
-    public void startDownload(String[] links, boolean extractAudio, String format) {
+    public void startDownload(String[] links, FormatEnum format) {
         downloading = true;
 
-        if(!Files.exists(Paths.get(System.getProperty("user.dir")).resolve("youtube-dl"))) {
-            extractTools();
+        if(!downloaderCheck()) {
+            ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
+            frame.setError("YouTube-DL needs to be extract wait a sec...");
+            frame.setVisible(true);
+            return;
         }
 
-        downloadRunnable = new DownloadRunnable(links, extractAudio, format);
-        thread = new Thread(downloadRunnable);
+        if(!ffmpegCheck()) {
+
+        }
+
+        downloaderRunnable = new DownloaderRunnable(links, format);
+        thread = new Thread(downloaderRunnable);
         thread.start();
     }
 
     public void stopDownload() {
         if(downloading) {
             downloading = false;
-            downloadRunnable.setStopping(true);
+            downloaderRunnable.setStopping(true);
             thread.interrupt();
         }
     }
 
-    private void extractTools() {
-        final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("youtube-dl");
-        if(inputStream == null) {
-            System.out.println("Failed to find the file.");
-            return;
-        }
-
-        final File targetFile = new File("youtube-dl");
-        try {
-            final OutputStream outputStream = new FileOutputStream(targetFile);
-            outputStream.write(inputStream.readAllBytes());
-
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public boolean isDownloading() {
         return downloading;
@@ -64,7 +54,7 @@ public class CommandManager {
         return thread;
     }
 
-    public DownloadRunnable getDownloadRunnable() {
-        return downloadRunnable;
+    public DownloaderRunnable getDownloadRunnable() {
+        return downloaderRunnable;
     }
 }

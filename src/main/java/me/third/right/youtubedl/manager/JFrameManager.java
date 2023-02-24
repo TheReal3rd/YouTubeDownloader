@@ -1,54 +1,54 @@
 package me.third.right.youtubedl.manager;
 
 import lombok.Getter;
+import me.third.right.youtubedl.utils.FormatEnum;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
+/**
+ * The GUI Interface used to control YouTube DL
+ */
 public class JFrameManager {
     public static JFrameManager INSTANCE;
 
-    @Getter private final JFrame frame;
-
-    @Getter private final JButton start;
-    @Getter private final JButton cancel;
-    @Getter private final JButton clear;
-    @Getter private final JButton fileSelect;
-
-    @Getter private final JLabel progress;
-
     @Getter private final JTextArea links;
+    private final JLabel progress;
 
     @Getter private final JCheckBox downloadPlaylists;
 
-    @Getter private final JCheckBox extractAudio;
-    @Getter private final String[] videoFormats = new String[] { "MP4", "MKV" };
-    @Getter private final JComboBox<String> videoFormat;
-    @Getter private final String[] audioFormats = new String[] { "MP3", "M4A" };
-    @Getter private final JComboBox<String> audioFormat;
+    @Getter private final JComboBox<FormatEnum> format;
 
-    @Getter private final FileSelectFrame fileSelectFrame = new FileSelectFrame();
+    private final FileSelectFrame fileSelectFrame = new FileSelectFrame();
 
     @Getter private final ErrorFrame errorFrame = new ErrorFrame();
 
     public JFrameManager() {
-        frame = new JFrame("YouTube Downloader V1.1");
+        JFrame frame = new JFrame("YouTube Downloader V1.2");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel secondPanel = new JPanel();
+        try {
+            final URL resource = JFrameManager.class.getResource("/Logo.png");
+            if(resource != null) {
+                final BufferedImage image = ImageIO.read(resource);
+                frame.setIconImage(image);
+            }
+        } catch (IOException ignore) {
+            //If it doesn't work no matter it's not important.
+        }
+
+        final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new FlowLayout());
         secondPanel.setBackground(Color.BLACK);
         frame.add(secondPanel);
 
         // Text Area
 
-        JPanel topPanel = new JPanel();
+        final JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(920, 440));
         topPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         topPanel.setBackground(Color.LIGHT_GRAY);
@@ -57,38 +57,36 @@ public class JFrameManager {
         links = new JTextArea();
         links.setBackground(Color.LIGHT_GRAY);
 
-        JScrollPane scrollPane = new JScrollPane(links);
+        final JScrollPane scrollPane = new JScrollPane(links);
         scrollPane.setPreferredSize(new Dimension(921, 441));
         topPanel.add(scrollPane);
 
         // Button Area
 
-        clear = new JButton("CLEAR");
+        final JButton clear = new JButton("CLEAR");
         clear.setLayout(new FlowLayout(FlowLayout.RIGHT));
         clear.setPreferredSize(new  Dimension(80, 30));
         clear.setBackground(Color.LIGHT_GRAY);
         clear.addActionListener(X -> links.setText(""));
         secondPanel.add(clear);
 
-        start = new JButton("START");
+        final JButton start = new JButton("START");
         start.setLayout(new FlowLayout(FlowLayout.LEFT));
         start.setPreferredSize(new  Dimension(80, 30));
         start.setBackground(Color.LIGHT_GRAY);
         start.addActionListener(X -> {
-            final boolean extractAudio = getExtractAudio().isSelected();
-            final String format = extractAudio ?  audioFormats[getAudioFormat().getSelectedIndex()] : videoFormats[getVideoFormat().getSelectedIndex()];
-            CommandManager.INSTANCE.startDownload(links.getText().split("\n"), extractAudio, format);
+            CommandManager.INSTANCE.startDownload(links.getText().split("\n"), FormatEnum.values()[getFormat().getSelectedIndex()]);
         });
         secondPanel.add(start);
 
-        cancel = new JButton("CANCEL");
+        final JButton cancel = new JButton("CANCEL");
         cancel.setLayout(new FlowLayout(FlowLayout.LEFT));
         cancel.setPreferredSize(new  Dimension(90, 30));
         cancel.setBackground(Color.LIGHT_GRAY);
         cancel.addActionListener(X -> CommandManager.INSTANCE.stopDownload());
         secondPanel.add(cancel);
 
-        fileSelect = new JButton("File");
+        final JButton fileSelect = new JButton("File");
         fileSelect.setLayout(new FlowLayout(FlowLayout.RIGHT));
         fileSelect.setPreferredSize(new  Dimension(60, 30));
         fileSelect.setBackground(Color.LIGHT_GRAY);
@@ -101,30 +99,13 @@ public class JFrameManager {
         downloadPlaylists.setBackground(Color.BLACK);
         secondPanel.add(downloadPlaylists);
 
-        extractAudio = new JCheckBox("Extract Audio", false);
-        extractAudio.setBackground(Color.BLACK);
-        extractAudio.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                audioFormat.setVisible(extractAudio.isSelected());
-                videoFormat.setVisible(!extractAudio.isSelected());
-            }
-        });
-        secondPanel.add(extractAudio);
-
-        audioFormat = new JComboBox<>(audioFormats);
-        audioFormat.setVisible(extractAudio.isSelected());
-        audioFormat.setBackground(Color.LIGHT_GRAY);
-        secondPanel.add(audioFormat);
-
-        videoFormat = new JComboBox<>(videoFormats);
-        videoFormat.setVisible(!extractAudio.isSelected());
-        videoFormat.setBackground(Color.LIGHT_GRAY);
-        secondPanel.add(videoFormat);
+        format = new JComboBox<>(FormatEnum.values());
+        format.setBackground(Color.LIGHT_GRAY);
+        secondPanel.add(format);
 
         // Progress and logs
 
-        progress = new JLabel("Progress: 0.0% ?/?");
+        progress = new JLabel("Progress: 0.0% ETA: 0s ?/?");
         progress.setBackground(Color.BLACK);
         secondPanel.add(progress);
 
@@ -135,28 +116,7 @@ public class JFrameManager {
         frame.setVisible(true);
     }
 
-    public void setProgress(float progressF, int size, int index) {
-        progress.setText("Progress: %.1f%% %d/%d".formatted(progressF, index, size));
-    }
-
-    public void loadFile(File file) {
-        final StringBuilder messages = new StringBuilder();
-        final InputStream stream;
-        try {
-            stream = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        final Scanner scanner = new Scanner(stream);
-        while(scanner.hasNextLine()) {
-            final String line = scanner.nextLine();
-            if(line.isEmpty()) continue;
-            messages.append(line).append("\n");
-        }
-
-        scanner.close();
-        getLinks().setText(messages.toString());
+    public void setProgress(float progress, long eta, int completed, int amount) {
+        this.progress.setText("Progress: %.1f%% ETA: %ds %d/%d".formatted(progress, eta, completed, amount));
     }
 }
