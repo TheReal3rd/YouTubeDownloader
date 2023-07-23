@@ -1,6 +1,8 @@
 package me.third.right.youtubedl.utils;
 
 import me.third.right.youtubedl.YTDL;
+import me.third.right.youtubedl.manager.ErrorFrame;
+import me.third.right.youtubedl.manager.JFrameManager;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,11 +17,10 @@ public class Utils {
     public static final Path mainPath = new File("").toPath();
 
     /**
-     * Check YouTube DL is present if not it'll extract it.
+     * Check YouTube DL is present.
      */
     public static boolean downloaderCheck() {
         if(!Files.exists(mainPath.resolve("youtube-dl"))) {
-            extractResource("youtube-dl", mainPath.resolve("youtube-dl"));
             return false;
         }
         return true;
@@ -82,5 +83,11 @@ public class Utils {
 
         scanner.close();
         return messages.toString();
+    }
+
+    public static void displayError(String message) {
+        ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
+        frame.setError(message);
+        frame.setVisible(true);
     }
 }

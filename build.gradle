@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'me.third.right.youtubedl'
-version '1.0'
+version '1.2'
 
 repositories {
     maven { url 'https://jitpack.io' }

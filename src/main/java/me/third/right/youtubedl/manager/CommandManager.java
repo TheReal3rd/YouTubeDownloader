@@ -1,7 +1,15 @@
 package me.third.right.youtubedl.manager;
 
+import me.third.right.youtubedl.runnables.Download;
 import me.third.right.youtubedl.runnables.DownloaderRunnable;
 import me.third.right.youtubedl.utils.FormatEnum;
+import me.third.right.youtubedl.utils.Utils;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static me.third.right.youtubedl.utils.Utils.downloaderCheck;
 import static me.third.right.youtubedl.utils.Utils.ffmpegCheck;
@@ -22,14 +30,39 @@ public class CommandManager {
         downloading = true;
 
         if(!downloaderCheck()) {
-            ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
-            frame.setError("YouTube-DL needs to be extract wait a sec...");
-            frame.setVisible(true);
+            Utils.displayError("YouTube-DL needs to be downloaded wait a sec...");
+
+            //Path
+            Path path = Paths.get("youtube-dl");
+            //URL
+            URL url;
+            try {
+                url = new URL("https://github.com/ytdl-patched/youtube-dl/releases/latest/");
+
+                //TODO improve this it works tho so mission accomplished. in the future add a button to re-download this.
+                //We're looking for href="/ytdl-patched/youtube-dl/releases/download/2023.07.23.114514/youtube-dl"
+                //https://github.com/ytdl-patched/youtube-dl/releases/download/2023.07.23.114514/youtube-dl
+                final HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", "Mozilla/5.0");
+                int responseCode = con.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    url = new URL(con.getURL().toString().replaceAll( "https://github.com/ytdl-patched/youtube-dl/releases/tag/","https://github.com/ytdl-patched/youtube-dl/releases/download/") + "/youtube-dl");
+                    System.out.println(url);
+                }
+            } catch (IOException err) {
+                Utils.displayError("Something went wrong. { %s }".formatted(err));
+                return;
+            }
+
+            final Download download = new Download(path, url, true);
+            thread = new Thread(download);
+            thread.start();
             return;
         }
 
         if(!ffmpegCheck()) {
-
+            //TODO implement this. (Not sure how yet)
         }
 
         downloaderRunnable = new DownloaderRunnable(links, format);
