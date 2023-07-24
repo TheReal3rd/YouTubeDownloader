@@ -1,7 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.github.fvarrui:javapackager:1.7.2'
+    }
+}
+
 plugins {
     id 'java'
-    id("com.github.johnrengelman.shadow") version ("7.0.0")
+    //id("com.github.johnrengelman.shadow") version ("7.0.0")
 }
+apply plugin: 'io.github.fvarrui.javapackager.plugin'
+
 
 group 'me.third.right.youtubedl'
 version '1.2'
@@ -18,7 +29,7 @@ tasks.withType(JavaCompile) {
 }
 
 sourceSets {
-    all {
+    configureEach {
         dependencies {
             implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.1'
             implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
@@ -30,6 +41,13 @@ sourceSets {
     }
 }
 
+task packageMyApp(type: io.github.fvarrui.javapackager.gradle.PackageTask, dependsOn: build) {
+    mainClass = 'me.third.right.youtubedl.YTDL'
+    bundleJre = true
+}
+
+
+/* Old Shadow
 tasks.jar {
     manifest {
         attributes("Main-Class": "me.third.right.youtubedl.YTDL")
@@ -37,3 +55,4 @@ tasks.jar {
 
     finalizedBy("shadowJar")
 }
+ */

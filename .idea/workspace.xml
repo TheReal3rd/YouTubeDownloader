@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="1.2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/runnables/Download.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/JFrameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/JFrameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/runnables/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/runnables/DownloadFileRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/runnables/DownloaderRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/runnables/DownloadYTRunnable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/youtube-dl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/youtube-dl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +57,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2627824",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -68,7 +72,7 @@
   </component>
   <component name="RunManager">
     <configuration name="YTDL" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/azul-17.0.5" />
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/corretto-17.0.6" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="me.third.right.youtubedl.YTDL" />
       <module name="YouTubeDownloader.main" />

@@ -15,7 +15,7 @@ import static me.third.right.youtubedl.utils.Utils.mainPath;
 /**
  * Task used to download a list of YouTube Videos.
  */
-public class DownloaderRunnable implements Runnable {
+public class DownloadYTRunnable implements Runnable {
 
     @Setter @Getter
     private boolean stopping = false;
@@ -23,7 +23,7 @@ public class DownloaderRunnable implements Runnable {
     private final FormatEnum format;
     private final String[] links;
 
-    public DownloaderRunnable(String[] links, FormatEnum format) {
+    public DownloadYTRunnable(String[] links, FormatEnum format) {
         this.format = format;
         this.links = links;
     }

@@ -5,6 +5,8 @@ import me.third.right.youtubedl.manager.ErrorFrame;
 import me.third.right.youtubedl.manager.JFrameManager;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -85,9 +87,32 @@ public class Utils {
         return messages.toString();
     }
 
+    /**
+     * Displays an error frame used to tell the user what the program is doing or what needs to be fixed.
+     * @param message The error message that will be displayed to the user.
+     */
     public static void displayError(String message) {
         ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
         frame.setError(message);
         frame.setVisible(true);
+    }
+
+    /**
+     * Gets the latest version of a github project.
+     * @return the version number / name. (Null will be returned if it fails.)
+     */
+    public static String getGitLatest(URL gitUrl) {
+        try {
+            final HttpURLConnection con = (HttpURLConnection) gitUrl.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                return con.getURL().toString().replaceAll( gitUrl.toString().replaceAll("/latest/", "/tag/"),"");
+            } else return null;
+        } catch (IOException err) {
+            Utils.displayError("Something went wrong. { %s }".formatted(err));
+            return null;
+        }
     }
 }

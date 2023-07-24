@@ -9,12 +9,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-public class Download implements Runnable {
+public class DownloadFileRunnable implements Runnable {
     private final Path destination;
     private final URL source;
     private final boolean overwrite;
 
-    public Download(Path destination, URL source, boolean overwrite) {
+    public DownloadFileRunnable(Path destination, URL source, boolean overwrite) {
         this.destination = destination;
         this.source = source;
         this.overwrite = overwrite;

@@ -1,6 +1,7 @@
 package me.third.right.youtubedl.manager;
 
 import lombok.Getter;
+import me.third.right.youtubedl.YTDL;
 import me.third.right.youtubedl.utils.FormatEnum;
 
 import javax.imageio.ImageIO;
@@ -28,7 +29,7 @@ public class JFrameManager {
     @Getter private final ErrorFrame errorFrame = new ErrorFrame();
 
     public JFrameManager() {
-        JFrame frame = new JFrame("YouTube Downloader V1.2");
+        JFrame frame = new JFrame("%s %s".formatted(YTDL.name, YTDL.version));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {
@@ -97,6 +98,7 @@ public class JFrameManager {
 
         downloadPlaylists = new JCheckBox("Download Playlists", false);
         downloadPlaylists.setBackground(Color.BLACK);
+        downloadPlaylists.setForeground(Color.WHITE);
         secondPanel.add(downloadPlaylists);
 
         format = new JComboBox<>(FormatEnum.values());
@@ -107,6 +109,7 @@ public class JFrameManager {
 
         progress = new JLabel("Progress: 0.0% ETA: 0s ?/?");
         progress.setBackground(Color.BLACK);
+        progress.setForeground(Color.WHITE);
         secondPanel.add(progress);
 
         // Frame END
