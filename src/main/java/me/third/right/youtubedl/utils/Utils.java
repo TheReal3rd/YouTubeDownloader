@@ -6,9 +6,11 @@ import me.third.right.youtubedl.manager.JFrameManager;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 /**
@@ -16,7 +18,15 @@ import java.util.Scanner;
  */
 public class Utils {
     // Paths
-    public static final Path mainPath = new File("").toPath();
+    public static final Path mainPath;
+
+    static {
+        try {
+            mainPath = Path.of(new File(Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Check YouTube DL is present.
@@ -35,6 +45,8 @@ public class Utils {
     public static boolean ffmpegCheck() {
         if(YTDL.isWindows()) {
             //TODO: Need to test this on Windows / Need to know how YouTube-DL looks for ffmpeg. So i can extract the ffmpeg from resource to the correct location.
+        } else {
+
         }
         return true;
     }
@@ -91,9 +103,10 @@ public class Utils {
      * Displays an error frame used to tell the user what the program is doing or what needs to be fixed.
      * @param message The error message that will be displayed to the user.
      */
-    public static void displayError(String message) {
+    public static void displayMessage(String title, String message) {
         ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
-        frame.setError(message);
+        frame.setTitle(title);
+        frame.setMessage(message);
         frame.setVisible(true);
     }
 
@@ -111,8 +124,23 @@ public class Utils {
                 return con.getURL().toString().replaceAll( gitUrl.toString().replaceAll("/latest/", "/tag/"),"");
             } else return null;
         } catch (IOException err) {
-            Utils.displayError("Something went wrong. { %s }".formatted(err));
+            Utils.displayMessage("Git Error", "Something went wrong. { %s }".formatted(err));
             return null;
+        }
+    }
+
+    public static void downloadFile(Path destination, URL source, boolean overwrite) {
+        if(Files.exists(destination) && !overwrite) {
+            Utils.displayMessage("Download Error","The File already exists.");
+            return;
+        }
+
+        try(InputStream in = source.openStream()) {
+            Files.copy(in, destination, StandardCopyOption.REPLACE_EXISTING);
+            Utils.displayMessage("YT-DL download complete!","Finished downloading from "+source.toString());
+        } catch (IOException e) {
+            Utils.displayMessage("Error","Failed to download the required files!");
+            e.printStackTrace();
         }
     }
 }

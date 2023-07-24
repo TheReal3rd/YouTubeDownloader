@@ -6,9 +6,9 @@ import com.sapher.youtubedl.YoutubeDLRequest;
 import com.sapher.youtubedl.YoutubeDLResponse;
 import lombok.Getter;
 import lombok.Setter;
-import me.third.right.youtubedl.manager.ErrorFrame;
 import me.third.right.youtubedl.manager.JFrameManager;
 import me.third.right.youtubedl.utils.FormatEnum;
+import me.third.right.youtubedl.utils.Utils;
 
 import static me.third.right.youtubedl.utils.Utils.mainPath;
 
@@ -62,10 +62,11 @@ public class DownloadYTRunnable implements Runnable {
                 e.printStackTrace();
 
                 //We display custom error message with detail on the issue.
-                ErrorFrame frame = JFrameManager.INSTANCE.getErrorFrame();
-                frame.setError(e.getMessage());
-                frame.setVisible(true);
+                Utils.displayMessage("YT-DL Error",e.getMessage());
             }
         }
+
+        if(stopping) Utils.displayMessage("Stopped", "Stopped all video downloads.");
+        else Utils.displayMessage("Finished", "All video downloads are completed.");
     }
 }

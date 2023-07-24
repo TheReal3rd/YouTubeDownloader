@@ -35,8 +35,12 @@ public class ErrorFrame {
         frame.setVisible(false);
     }
 
-    public void setError(String error) {
+    public void setMessage(String error) {
         message.setText(error);
+    }
+
+    public void setTitle(String title) {
+        frame.setTitle(title);
     }
 
     public void setVisible(boolean visible) {

@@ -9,7 +9,6 @@ buildscript {
 
 plugins {
     id 'java'
-    //id("com.github.johnrengelman.shadow") version ("7.0.0")
 }
 apply plugin: 'io.github.fvarrui.javapackager.plugin'
 
@@ -41,18 +40,18 @@ sourceSets {
     }
 }
 
-task packageMyApp(type: io.github.fvarrui.javapackager.gradle.PackageTask, dependsOn: build) {
+javapackager {
+    // common configuration
     mainClass = 'me.third.right.youtubedl.YTDL'
     bundleJre = true
+    generateInstaller = false
 }
-
-
-/* Old Shadow
-tasks.jar {
-    manifest {
-        attributes("Main-Class": "me.third.right.youtubedl.YTDL")
-    }
-
-    finalizedBy("shadowJar")
+task packageMyAppForLinux(type: io.github.fvarrui.javapackager.gradle.PackageTask) {
+    platform = "linux"
+    //createTarball = true
 }
- */
+task packageMyAppForWindows(type: io.github.fvarrui.javapackager.gradle.PackageTask) {
+    platform = "windows"
+    //createZipball = true
+}
+build.dependsOn(dependsOn: [ 'packageMyAppForLinux', 'packageMyAppForWindows' ])
