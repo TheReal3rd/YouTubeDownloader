@@ -14,7 +14,7 @@ apply plugin: 'io.github.fvarrui.javapackager.plugin'
 
 
 group 'me.third.right.youtubedl'
-version '1.2'
+version '1.3'
 
 repositories {
     maven { url 'https://jitpack.io' }
@@ -52,6 +52,6 @@ task packageMyAppForLinux(type: io.github.fvarrui.javapackager.gradle.PackageTas
 }
 task packageMyAppForWindows(type: io.github.fvarrui.javapackager.gradle.PackageTask) {
     platform = "windows"
-    //createZipball = true
+    createZipball = true
 }
 build.dependsOn(dependsOn: [ 'packageMyAppForLinux', 'packageMyAppForWindows' ])

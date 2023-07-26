@@ -1,5 +1,9 @@
 package com.sapher.youtubedl;
 
+import lombok.Getter;
+import lombok.Setter;
+import me.third.right.youtubedl.YTDL;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -7,6 +11,8 @@ import java.util.Map;
 /**
  * YoutubeDL request
  */
+@Getter
+@Setter
 public class YoutubeDLRequest {
 
 
@@ -14,47 +20,11 @@ public class YoutubeDLRequest {
 
     private String url;
 
-    private final Map<String, String> options = new HashMap<String, String>();
+    private final Map<String, String> options = new HashMap<>();
 
     private boolean extractAudio = false;
 
     private String format = null;
-
-    public String getDirectory() {
-        return directory;
-    }
-
-    public void setDirectory(String directory) {
-        this.directory = directory;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public boolean isExtractAudio() {
-        return extractAudio;
-    }
-
-    public void setExtractAudio(boolean extractAudio) {
-        this.extractAudio = extractAudio;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public Map<String, String> getOptions() {
-        return options;
-    }
 
     public void setOption(String key) {
         options.put(key, null);
@@ -99,9 +69,12 @@ public class YoutubeDLRequest {
      */
     protected String buildOptions() {
         final StringBuilder builder = new StringBuilder();
-
-        if(extractAudio) {
+        if (extractAudio) {
             builder.append("-x --audio-format %s ".formatted(format.toLowerCase()));
+        }
+
+        if(YTDL.isWindows()) {
+            builder.append("--no-check-certificate ");//Only happens on windows.
         }
 
         // Build options strings
@@ -112,23 +85,21 @@ public class YoutubeDLRequest {
             String name = (String) option.getKey();
             String value = (String) option.getValue();
 
-            if(value == null) value = "";
+            if (value == null) value = "";
 
             String optionFormatted = String.format("--%s %s", name, value).trim();
-            builder.append(optionFormatted + " ");
+            builder.append(optionFormatted).append(" ");
 
             it.remove();
         }
 
-        if(!extractAudio) {
+        if (!extractAudio) {
             builder.append("--format bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best --merge-output-format %s ".formatted(format.toLowerCase()));
         }
 
         // Set Url
-        if(url != null)
-            builder.append(url + " ");
-
-        System.out.println(builder);
+        if (url != null)
+            builder.append(url).append(" ");
 
         return builder.toString().trim();
     }

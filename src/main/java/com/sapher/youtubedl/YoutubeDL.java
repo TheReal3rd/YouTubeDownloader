@@ -6,6 +6,8 @@ import com.sapher.youtubedl.mapper.VideoInfo;
 import com.sapher.youtubedl.mapper.VideoThumbnail;
 import com.sapher.youtubedl.utils.StreamGobbler;
 import com.sapher.youtubedl.utils.StreamProcessExtractor;
+import me.third.right.youtubedl.manager.DownloadManager;
+import me.third.right.youtubedl.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,12 +57,12 @@ public class YoutubeDL {
      * @throws YoutubeDLException
      */
     public static YoutubeDLResponse execute(YoutubeDLRequest request, DownloadProgressCallback callback) throws YoutubeDLException {
-
         String command = buildCommand(request.buildOptions());
         String directory = request.getDirectory();
         Map<String, String> options = request.getOptions();
 
-        YoutubeDLResponse youtubeDLResponse;
+        System.out.println(command);
+
         Process process;
         int exitCode;
         StringBuffer outBuffer = new StringBuffer(); //stdout
@@ -77,6 +79,7 @@ public class YoutubeDL {
 
         try {
             process = processBuilder.start();
+            DownloadManager.INSTANCE.setProcess(process);
         } catch (IOException e) {
             throw new YoutubeDLException(e);
         }
@@ -92,7 +95,6 @@ public class YoutubeDL {
             stdErrProcessor.join();
             exitCode = process.waitFor();
         } catch (InterruptedException e) {
-
             // process exited for some reason
             throw new YoutubeDLException(e);
         }
@@ -105,10 +107,7 @@ public class YoutubeDL {
         }
 
         int elapsedTime = (int) ((System.nanoTime() - startTime) / 1000000);
-
-        youtubeDLResponse = new YoutubeDLResponse(command, options, directory, exitCode , elapsedTime, out, err);
-
-        return youtubeDLResponse;
+        return new YoutubeDLResponse(command, options, directory, exitCode , elapsedTime, out, err);
     }
 
 
@@ -120,7 +119,7 @@ public class YoutubeDL {
     public static String getVersion() throws YoutubeDLException {
         YoutubeDLRequest request = new YoutubeDLRequest();
         request.setOption("version");
-        return YoutubeDL.execute(request).getOut();
+        return YoutubeDL.execute(request).out();
     }
 
     /**
@@ -142,7 +141,7 @@ public class YoutubeDL {
         VideoInfo videoInfo;
 
         try {
-            videoInfo = objectMapper.readValue(response.getOut(), VideoInfo.class);
+            videoInfo = objectMapper.readValue(response.out(), VideoInfo.class);
         } catch (IOException e) {
             throw new YoutubeDLException("Unable to parse video information: " + e.getMessage());
         }

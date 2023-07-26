@@ -1,8 +1,8 @@
 package me.third.right.youtubedl.utils;
 
 import me.third.right.youtubedl.YTDL;
-import me.third.right.youtubedl.manager.ErrorFrame;
-import me.third.right.youtubedl.manager.JFrameManager;
+import me.third.right.youtubedl.gui.ErrorFrame;
+import me.third.right.youtubedl.gui.JFrameManager;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -32,25 +32,16 @@ public class Utils {
      * Check YouTube DL is present.
      */
     public static boolean downloaderCheck() {
-        if(!Files.exists(mainPath.resolve("youtube-dl"))) {
-            return false;
-        }
-        return true;
+        return Files.exists(mainPath.resolve("youtube-dl"));
     }
 
     /**
-     * Checks FFMPEG is present if not it'll download it.
-     * I'm not planning to add support for Linux.
+     * Check FFMPEG is present. Might as well just do it for Linux so this works right out of the box.
      */
     public static boolean ffmpegCheck() {
-        if(YTDL.isWindows()) {
-            //TODO: Need to test this on Windows / Need to know how YouTube-DL looks for ffmpeg. So i can extract the ffmpeg from resource to the correct location.
-        } else {
-
-        }
-        return true;
+        String name = YTDL.isWindows() ? "winFFmpeg/ffmpeg.exe" : "ffmpeg";
+        return Files.exists(mainPath.resolve(name));
     }
-
 
     /**
      * Extracts files form the resource area.
@@ -129,6 +120,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Read the name.
+     * @param destination read the name.
+     * @param source read the name.
+     * @param overwrite Whether to overwrite or not.
+     */
     public static void downloadFile(Path destination, URL source, boolean overwrite) {
         if(Files.exists(destination) && !overwrite) {
             Utils.displayMessage("Download Error","The File already exists.");
