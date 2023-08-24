@@ -17,7 +17,7 @@ public class ErrorFrame {
 
         final JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(480, 280));
-        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         topPanel.setBackground(Color.lightGray);
         frame.add(topPanel);
 
@@ -26,7 +26,7 @@ public class ErrorFrame {
         message.setBackground(Color.LIGHT_GRAY);
         message.setLineWrap(true);
         message.setEditable(false);
-        message.setPreferredSize(new Dimension(480, 280));
+        message.setPreferredSize(new Dimension(440, 240));
         topPanel.add(message);
 
         frame.pack();

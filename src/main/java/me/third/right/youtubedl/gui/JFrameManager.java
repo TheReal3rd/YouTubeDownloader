@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.third.right.youtubedl.YTDL;
 import me.third.right.youtubedl.manager.DownloadManager;
 import me.third.right.youtubedl.utils.FormatEnum;
+import me.third.right.youtubedl.utils.Utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -66,6 +67,25 @@ public class JFrameManager {
         topPanel.add(scrollPane);
 
         // Button Area
+
+        final JButton reset = new JButton("RESET");
+        reset.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        reset.setPreferredSize(new  Dimension(80, 30));
+        reset.setBackground(Color.LIGHT_GRAY);
+        reset.addActionListener(X -> {
+            String title;
+            String message;
+            if(Utils.deleteFile(Utils.mainPath.resolve("youtube-dl"))) {
+                title = "Success";
+                message = "Successfully deleted youtube-dl";
+            } else {
+                title = "Failed";
+                message = "Failed deleted youtube-dl";
+            }
+
+            Utils.displayMessage(title, message);
+        });
+        secondPanel.add(reset);
 
         final JButton clear = new JButton("CLEAR");
         clear.setLayout(new FlowLayout(FlowLayout.RIGHT));

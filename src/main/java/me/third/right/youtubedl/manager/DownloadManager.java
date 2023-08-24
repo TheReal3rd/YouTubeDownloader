@@ -58,8 +58,6 @@ public class DownloadManager {
                 for(String name : names) {
                     Utils.extractResource("winFFmpeg/%s".formatted(name), Utils.mainPath.resolve(name));
                 }
-            } else {
-                Utils.extractResource("ffmpeg", Utils.mainPath.resolve("ffmpeg"));
             }
         }
 

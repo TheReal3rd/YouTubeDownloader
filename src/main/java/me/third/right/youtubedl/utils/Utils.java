@@ -36,10 +36,11 @@ public class Utils {
     }
 
     /**
-     * Check FFMPEG is present. Might as well just do it for Linux so this works right out of the box.
+     * Check FFMPEG is present. Linux one doesn't work just tell the user to install it.
      */
     public static boolean ffmpegCheck() {
-        String name = YTDL.isWindows() ? "winFFmpeg/ffmpeg.exe" : "ffmpeg";
+        if(!YTDL.isWindows()) return false;
+        String name = "winFFmpeg/ffmpeg.exe";
         return Files.exists(mainPath.resolve(name));
     }
 
@@ -88,6 +89,15 @@ public class Utils {
 
         scanner.close();
         return messages.toString();
+    }
+
+    public static boolean deleteFile(Path path) {
+        try {
+            return Files.deleteIfExists(path);
+        } catch (IOException err) {
+            System.out.printf("Failed to do delete operation. %s", err);
+            return false;
+        }
     }
 
     /**
