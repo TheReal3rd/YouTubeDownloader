@@ -10,9 +10,13 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Properties;
 import java.util.Scanner;
 
 /**
@@ -117,11 +121,15 @@ public class Utils {
      * Gets the latest version of a github project.
      * @return the version number / name. (Null will be returned if it fails.)
      */
-    public static String getGitLatest(URL gitUrl) {//TODO fix this ssl issue.
+    public static String getGitLatest(URL gitUrl) {//TODO fix this ssl issue. -Djdk.tls.client.protocols=TLSv1.1,TLSv1.2,TLSv1.3
+       // System.setProperty("jdk.tls.client.protocols", "TLSv1.1,TLSv1.2,TLSv1.3");
+        //System.setProperty("javax.net.debug", "all");//Djavax.net.debug=all fla
         try {
             final HttpsURLConnection con = (HttpsURLConnection) gitUrl.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            con.setInstanceFollowRedirects(true);
+
             int responseCode = con.getResponseCode();
             System.out.println(responseCode);
             if (responseCode == HttpsURLConnection.HTTP_OK) {

@@ -39,8 +39,6 @@ sourceSets {
             annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
             implementation 'com.google.code.gson:gson:2.8.0'
-
-            implementation 'org.jboss.spec.javax.net.ssl:jboss-jsse-api_8.0_spec:1.0.0.Final'
         }
     }
 }

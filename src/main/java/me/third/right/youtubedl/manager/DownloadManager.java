@@ -35,12 +35,12 @@ public class DownloadManager {
 
         if(!downloaderCheck()) {//Works and complete.
             Utils.displayMessage("Missing Components","YouTube-DL needs to be downloaded wait a sec...");
+            EnumSetting<Source> setting = SettingsManager.INSTANCE.getSourceSetting();
 
             //Path
-            Path path = Utils.mainPath.resolve("youtube-dl");
+            Path path = Utils.mainPath.resolve(setting.getSelected().getName());
             //URL
             URL url;
-            EnumSetting<Source> setting = SettingsManager.INSTANCE.getSourceSetting();
             try {
                 url = new URL("%s/releases/latest/".formatted(setting.getSelected().getUrl()));
                 final String ytdlVersion = Utils.getGitLatest(url);
@@ -62,6 +62,7 @@ public class DownloadManager {
             Utils.downloadFile(path, url, true);//No need to put it in a thread.
         }
 
+        //TODO check winget has ffmpeg install.
         //I would make it download ffmpeg then extract it then do a cleanup. But honestly no. Windows is the main annoyance. unlike windows ffmpeg can be installed using apt or pacman.
         //So fuck windows slow, bloated and a memory hog.
         if(!ffmpegCheck()) {//I won't make this download the latest version from git cause FFMPEG never really updates.

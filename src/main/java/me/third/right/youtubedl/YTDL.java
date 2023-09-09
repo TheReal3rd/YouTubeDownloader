@@ -11,6 +11,7 @@ public class YTDL {
     public final static String version = "1.4";
 
     public static void main(String[] args) {
+        System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,TLSv1");//Important.
         isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
 
         DownloadManager.INSTANCE = new DownloadManager();

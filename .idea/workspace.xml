@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="1.2 JavaPackager implemented. Fixed bugs and improved overall functionality.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/SettingsFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/SettingsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/EnumSetting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/SettingBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/shutHook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Source.java" afterDir="false" />
+    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Incomplete improvements. SSL issue.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/FileSelectFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/FileSelectFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/JFrameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/JFrameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/SettingsFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/DownloadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/DownloadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/m3u8/m3u8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/m3u8/m3u8Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/m3u8/m3u8Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadM3U8Runnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadM3U8Runnable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690225348209</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Incomplete improvements. SSL issue.">
+      <created>1694286419141</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1694286419141</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,7 +171,8 @@
     <MESSAGE value="Fixes and improvements." />
     <MESSAGE value="1.2" />
     <MESSAGE value="1.2 JavaPackager implemented. Fixed bugs and improved overall functionality." />
-    <option name="LAST_COMMIT_MESSAGE" value="1.2 JavaPackager implemented. Fixed bugs and improved overall functionality." />
+    <MESSAGE value="Incomplete improvements. SSL issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="Incomplete improvements. SSL issue." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -78,26 +78,6 @@ public class JFrameManager {
         settings.setToolTipText("Opens settings menu.");
         secondPanel.add(settings);
 
-        final JButton reset = new JButton("RESET");
-        reset.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        reset.setPreferredSize(new  Dimension(80, 30));
-        reset.setBackground(Color.LIGHT_GRAY);
-        reset.addActionListener(X -> {
-            String title;
-            String message;
-            if(Utils.deleteFile(Utils.mainPath.resolve("youtube-dl"))) {
-                title = "Success";
-                message = "Successfully deleted youtube-dl";
-            } else {
-                title = "Failed";
-                message = "Failed deleted youtube-dl";
-            }
-
-            Utils.displayMessage(title, message);
-        });
-        reset.setToolTipText("Deletes all YT Downloaders to redownload the latest versions.");
-        secondPanel.add(reset);
-
         final JButton clear = new JButton("CLEAR");
         clear.setLayout(new FlowLayout(FlowLayout.RIGHT));
         clear.setPreferredSize(new  Dimension(80, 30));
