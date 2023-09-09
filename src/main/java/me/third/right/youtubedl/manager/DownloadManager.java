@@ -4,11 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import me.third.right.youtubedl.YTDL;
 import me.third.right.youtubedl.gui.JFrameManager;
+import me.third.right.youtubedl.settings.EnumSetting;
+import me.third.right.youtubedl.utils.FormatEnum;
+import me.third.right.youtubedl.utils.Source;
+import me.third.right.youtubedl.utils.Utils;
 import me.third.right.youtubedl.utils.runnables.DownloadM3U8Runnable;
 import me.third.right.youtubedl.utils.runnables.DownloadYTRunnable;
 import me.third.right.youtubedl.utils.runnables.RunnableBase;
-import me.third.right.youtubedl.utils.FormatEnum;
-import me.third.right.youtubedl.utils.Utils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,14 +40,24 @@ public class DownloadManager {
             Path path = Utils.mainPath.resolve("youtube-dl");
             //URL
             URL url;
+            EnumSetting<Source> setting = SettingsManager.INSTANCE.getSourceSetting();
             try {
-                url = new URL("https://github.com/ytdl-patched/youtube-dl/releases/latest/");
+                url = new URL("%s/releases/latest/".formatted(setting.getSelected().getUrl()));
                 final String ytdlVersion = Utils.getGitLatest(url);
-                url = new URL("https://github.com/ytdl-patched/youtube-dl/releases/download/%s/youtube-dl".formatted(ytdlVersion));
+                if(ytdlVersion == null) {
+                    Utils.displayMessage("Failed to fetch version", "The process to fetch the latest version of the requested YTDL fork failed.");
+                    System.out.println("\n\n%s\n\n".formatted(url.toString()));
+                    System.out.println("Its null.");
+                    return;
+                }
+                url = new URL("%s/releases/download/%s/%s".formatted(setting.getSelected().getUrl(), ytdlVersion, setting.getSelected().getName()));
             } catch (IOException err) {
                 Utils.displayMessage("YT-DL Latest Download Failure", "Something went wrong. { %s }".formatted(err));
+                System.out.println(err);
                 return;
             }
+
+            System.out.println("\n\n%s\n\n".formatted(url.toString()));
 
             Utils.downloadFile(path, url, true);//No need to put it in a thread.
         }

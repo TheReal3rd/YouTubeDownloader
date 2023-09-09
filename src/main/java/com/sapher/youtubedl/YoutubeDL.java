@@ -7,7 +7,7 @@ import com.sapher.youtubedl.mapper.VideoThumbnail;
 import com.sapher.youtubedl.utils.StreamGobbler;
 import com.sapher.youtubedl.utils.StreamProcessExtractor;
 import me.third.right.youtubedl.manager.DownloadManager;
-import me.third.right.youtubedl.utils.Utils;
+import me.third.right.youtubedl.manager.SettingsManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class YoutubeDL {
     /**
      * Youtube-dl executable name
      */
-    protected static String executablePath = "python3 youtube-dl";
+    protected static String executablePath = "python3 %s";
 
     /**
      * Append executable name to command
@@ -36,7 +36,7 @@ public class YoutubeDL {
      * @return Command string
      */
     protected static String buildCommand(String command) {
-        return String.format("%s %s", executablePath, command);
+        return String.format("%s %s", getExecutablePath(), command);
     }
 
     /**
@@ -198,14 +198,6 @@ public class YoutubeDL {
      * @return path string
      */
     public static String getExecutablePath(){
-        return executablePath;
-    }
-
-    /**
-     * Set path to use for the command
-     * @param path String path to the executable
-     */
-    public static void setExecutablePath(String path){
-        executablePath = path;
+        return executablePath.formatted(SettingsManager.INSTANCE.getSourceSetting().getSelected().getName());
     }
 }

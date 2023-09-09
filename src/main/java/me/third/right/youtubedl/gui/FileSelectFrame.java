@@ -1,7 +1,6 @@
 package me.third.right.youtubedl.gui;
 
 import lombok.Getter;
-import me.third.right.youtubedl.gui.JFrameManager;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;

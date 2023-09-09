@@ -3,7 +3,9 @@ package me.third.right.youtubedl.utils;
 import me.third.right.youtubedl.YTDL;
 import me.third.right.youtubedl.gui.ErrorFrame;
 import me.third.right.youtubedl.gui.JFrameManager;
+import me.third.right.youtubedl.manager.SettingsManager;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
@@ -32,7 +34,7 @@ public class Utils {
      * Check YouTube DL is present.
      */
     public static boolean downloaderCheck() {
-        return Files.exists(mainPath.resolve("youtube-dl"));
+        return Files.exists(mainPath.resolve(SettingsManager.INSTANCE.getSourceSetting().getSelected().getName()));
     }
 
     /**
@@ -115,17 +117,19 @@ public class Utils {
      * Gets the latest version of a github project.
      * @return the version number / name. (Null will be returned if it fails.)
      */
-    public static String getGitLatest(URL gitUrl) {
+    public static String getGitLatest(URL gitUrl) {//TODO fix this ssl issue.
         try {
-            final HttpURLConnection con = (HttpURLConnection) gitUrl.openConnection();
+            final HttpsURLConnection con = (HttpsURLConnection) gitUrl.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("User-Agent", "Mozilla/5.0");
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            System.out.println(responseCode);
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
                 return con.getURL().toString().replaceAll( gitUrl.toString().replaceAll("/latest/", "/tag/"),"");
             } else return null;
         } catch (IOException err) {
             Utils.displayMessage("Git Error", "Something went wrong. { %s }".formatted(err));
+            System.out.println(err);
             return null;
         }
     }

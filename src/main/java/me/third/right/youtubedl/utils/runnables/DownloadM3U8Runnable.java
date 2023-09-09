@@ -1,11 +1,11 @@
 package me.third.right.youtubedl.utils.runnables;
 
 import com.sapher.youtubedl.YoutubeDLException;
-import me.third.right.youtubedl.manager.m3u8.m3u8;
-import me.third.right.youtubedl.manager.m3u8.m3u8Request;
-import me.third.right.youtubedl.manager.m3u8.m3u8Response;
 import me.third.right.youtubedl.gui.JFrameManager;
 import me.third.right.youtubedl.utils.Utils;
+import me.third.right.youtubedl.utils.m3u8.m3u8;
+import me.third.right.youtubedl.utils.m3u8.m3u8Request;
+import me.third.right.youtubedl.utils.m3u8.m3u8Response;
 
 import static me.third.right.youtubedl.utils.Utils.mainPath;
 

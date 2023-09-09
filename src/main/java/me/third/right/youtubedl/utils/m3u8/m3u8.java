@@ -1,4 +1,4 @@
-package me.third.right.youtubedl.manager.m3u8;
+package me.third.right.youtubedl.utils.m3u8;
 
 import com.sapher.youtubedl.DownloadProgressCallback;
 import com.sapher.youtubedl.YoutubeDLException;

@@ -32,6 +32,8 @@ public class JFrameManager {
 
     @Getter private final ErrorFrame errorFrame = new ErrorFrame();
 
+    @Getter private final SettingsFrame settingsFrame = new SettingsFrame();
+
     public JFrameManager() {
         JFrame frame = new JFrame("%s %s".formatted(YTDL.name, YTDL.version));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +70,14 @@ public class JFrameManager {
 
         // Button Area
 
+        final JButton settings = new JButton("SETTINGS");
+        settings.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        settings.setPreferredSize(new  Dimension(80, 30));
+        settings.setBackground(Color.LIGHT_GRAY);
+        settings.addActionListener(X -> settingsFrame.setVisible(!settingsFrame.isVisible()));
+        settings.setToolTipText("Opens settings menu.");
+        secondPanel.add(settings);
+
         final JButton reset = new JButton("RESET");
         reset.setLayout(new FlowLayout(FlowLayout.RIGHT));
         reset.setPreferredSize(new  Dimension(80, 30));
@@ -85,6 +95,7 @@ public class JFrameManager {
 
             Utils.displayMessage(title, message);
         });
+        reset.setToolTipText("Deletes all YT Downloaders to redownload the latest versions.");
         secondPanel.add(reset);
 
         final JButton clear = new JButton("CLEAR");
@@ -92,6 +103,7 @@ public class JFrameManager {
         clear.setPreferredSize(new  Dimension(80, 30));
         clear.setBackground(Color.LIGHT_GRAY);
         clear.addActionListener(X -> links.setText(""));
+        clear.setToolTipText("Clears the text field.");
         secondPanel.add(clear);
 
         final JButton start = new JButton("START");
@@ -101,6 +113,7 @@ public class JFrameManager {
         start.addActionListener(X -> {
             DownloadManager.INSTANCE.startDownload(links.getText().split("\n"), FormatEnum.values()[getFormat().getSelectedIndex()]);
         });
+        start.setToolTipText("Starts the download of all the listed urls.");
         secondPanel.add(start);
 
         final JButton cancel = new JButton("CANCEL");
@@ -108,6 +121,7 @@ public class JFrameManager {
         cancel.setPreferredSize(new  Dimension(90, 30));
         cancel.setBackground(Color.LIGHT_GRAY);
         cancel.addActionListener(X -> DownloadManager.INSTANCE.stopDownload());
+        cancel.setToolTipText("Stops the download.");
         secondPanel.add(cancel);
 
         final JButton fileSelect = new JButton("File");
@@ -115,6 +129,7 @@ public class JFrameManager {
         fileSelect.setPreferredSize(new  Dimension(60, 30));
         fileSelect.setBackground(Color.LIGHT_GRAY);
         fileSelect.addActionListener(X -> fileSelectFrame.setVisible(!fileSelectFrame.isVisible()));
+        fileSelect.setToolTipText("Open a text file and load its contents into the text field.");
         secondPanel.add(fileSelect);
 
         // Dropdown Area
@@ -130,15 +145,18 @@ public class JFrameManager {
                 JFrameManager.INSTANCE.format.setVisible(true);
             }
         });
+        downloadM3U8.setToolTipText("Download M3U8 video format and convert them.");
         secondPanel.add(downloadM3U8);
 
         downloadPlaylists = new JCheckBox("DL Playlists", false);
         downloadPlaylists.setBackground(Color.BLACK);
         downloadPlaylists.setForeground(Color.WHITE);
+        downloadPlaylists.setToolTipText("Download the given urls as a play list. The given URL must be a Youtube playlist to work.");
         secondPanel.add(downloadPlaylists);
 
         format = new JComboBox<>(FormatEnum.values());
         format.setBackground(Color.LIGHT_GRAY);
+        format.setToolTipText("The desired format.");
         secondPanel.add(format);
 
         // Progress and logs

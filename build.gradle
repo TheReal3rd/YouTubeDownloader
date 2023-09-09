@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath 'io.github.fvarrui:javapackager:1.7.2'
+        classpath 'com.google.code.gson:gson:2.8.0'
     }
 }
 
@@ -14,7 +15,7 @@ apply plugin: 'io.github.fvarrui.javapackager.plugin'
 
 
 group 'me.third.right.youtubedl'
-version '1.3'
+version '1.4'
 
 repositories {
     maven { url 'https://jitpack.io' }
@@ -36,6 +37,10 @@ sourceSets {
             //Lombok
             compileOnly 'org.projectlombok:lombok:1.18.20'
             annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+            implementation 'com.google.code.gson:gson:2.8.0'
+
+            implementation 'org.jboss.spec.javax.net.ssl:jboss-jsse-api_8.0_spec:1.0.0.Final'
         }
     }
 }
@@ -45,10 +50,12 @@ javapackager {
     mainClass = 'me.third.right.youtubedl.YTDL'
     bundleJre = true
     generateInstaller = false
+    copyDependencies = true
+    jreMinVersion = "17"
 }
 task packageMyAppForLinux(type: io.github.fvarrui.javapackager.gradle.PackageTask) {
     platform = "linux"
-    //createTarball = true
+    createTarball = true
 }
 task packageMyAppForWindows(type: io.github.fvarrui.javapackager.gradle.PackageTask) {
     platform = "windows"
