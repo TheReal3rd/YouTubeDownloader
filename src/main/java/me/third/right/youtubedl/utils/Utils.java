@@ -7,16 +7,11 @@ import me.third.right.youtubedl.manager.SettingsManager;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Properties;
 import java.util.Scanner;
 
 /**
@@ -115,6 +110,7 @@ public class Utils {
         frame.setTitle(title);
         frame.setMessage(message);
         frame.setVisible(true);
+        System.out.println("\n\n%s\n%s".formatted(title, message));
     }
 
     /**
@@ -156,7 +152,7 @@ public class Utils {
 
         try(InputStream in = source.openStream()) {
             Files.copy(in, destination, StandardCopyOption.REPLACE_EXISTING);
-            Utils.displayMessage("YT-DL download complete!","Finished downloading from "+source.toString());
+            Utils.displayMessage("YT-DL download complete!","Finished downloading from "+ source);
         } catch (IOException e) {
             Utils.displayMessage("Error","Failed to download the required files!");
             e.printStackTrace();

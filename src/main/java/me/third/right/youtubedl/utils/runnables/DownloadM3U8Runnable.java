@@ -10,7 +10,7 @@ import me.third.right.youtubedl.utils.m3u8.m3u8Response;
 import static me.third.right.youtubedl.utils.Utils.mainPath;
 
 /**
- * Task used to download a list of YouTube Videos.
+ * Task used to download a list of M3U8 Videos.
  */
 public class DownloadM3U8Runnable extends RunnableBase {
     private final String[] links;
@@ -30,14 +30,12 @@ public class DownloadM3U8Runnable extends RunnableBase {
             final String text = s.trim();
             try {
                 // Build request
-                m3u8Request request = new m3u8Request(text);
+                m3u8Request request = new m3u8Request(text, i + 1);
                 request.setDirectory(mainPath.toAbsolutePath().toString());
 
                 // Make request and return response;
                 final int finalI = i;
-                m3u8Response response = m3u8.execute(request, (progress, etaInSeconds) -> {
-                    JFrameManager.INSTANCE.setProgress(progress, etaInSeconds, finalI, links.length);
-                });
+                m3u8Response response = m3u8.execute(request, (progress, etaInSeconds) -> JFrameManager.INSTANCE.setProgress(progress, etaInSeconds, finalI, links.length));
 
                 // Response
                 String stdOut = response.out(); // Executable output
@@ -52,7 +50,7 @@ public class DownloadM3U8Runnable extends RunnableBase {
                 e.printStackTrace();
 
                 //We display custom error message with detail on the issue.
-                Utils.displayMessage("YT-DL Error",e.getMessage());
+                Utils.displayMessage("YT-DL Error", e.getMessage());
                 return;
             }
         }

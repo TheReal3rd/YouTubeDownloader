@@ -28,7 +28,7 @@ public class YoutubeDL {
     /**
      * Youtube-dl executable name
      */
-    protected static String executablePath = "python3 %s";
+    public static String executablePath = "python3 %s";
 
     /**
      * Append executable name to command

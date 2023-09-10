@@ -39,9 +39,7 @@ public class FileSelectFrame {
                         JFrameManager.INSTANCE.getLinks().setText(loadTextFile( fileChooser.getSelectedFile()));
                         setVisible(false);
                     }
-                    case "CancelSelection" -> {
-                        setVisible(false);
-                    }
+                    case "CancelSelection" -> setVisible(false);
                 }
             }
         });

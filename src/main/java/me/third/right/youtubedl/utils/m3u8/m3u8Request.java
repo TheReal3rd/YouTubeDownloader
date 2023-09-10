@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * YoutubeDL request
+ * m3u8 request
  */
 @Getter
 @Setter
@@ -12,22 +12,16 @@ public class m3u8Request {
     private String directory;
     private String url;
 
-    /**
-     * Construct a request with a videoUrl
-     * @param url
-     */
-    public m3u8Request(String url) {
-        this.url = url;
-    }
+    private int id;
 
     /**
-     * Construct a request with a videoUrl and working directory
-     * @param url
-     * @param directory
+     * Construct a request with a videoUrl
+     * @param url m3u8 url.
+     * @param id the ID / EP ID : EP 1
      */
-    public m3u8Request(String url, String directory) {
+    public m3u8Request(String url, int id) {
         this.url = url;
-        this.directory = directory;
+        this.id = id;
     }
 
     /**
@@ -39,6 +33,8 @@ public class m3u8Request {
 
         if (url != null)
             builder.append(url).append(" ");
+
+        builder.append("-o EP %d".formatted(this.id));//TODO add an option / method to split this to seasons and different name.
 
         return builder.toString().trim();
     }

@@ -54,16 +54,6 @@ public class YoutubeDLRequest {
     }
 
     /**
-     * Construct a request with a videoUrl and working directory
-     * @param url
-     * @param directory
-     */
-    public YoutubeDLRequest(String url, String directory) {
-        this.url = url;
-        this.directory = directory;
-    }
-
-    /**
      * Transform options to a string that the executable will execute
      * @return Command string
      */

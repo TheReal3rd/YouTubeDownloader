@@ -7,7 +7,7 @@ import lombok.Getter;
 import me.third.right.youtubedl.gui.JFrameManager;
 import me.third.right.youtubedl.settings.EnumSetting;
 import me.third.right.youtubedl.settings.SettingBase;
-import me.third.right.youtubedl.utils.Source;
+import me.third.right.youtubedl.utils.YTFork;
 import me.third.right.youtubedl.utils.Utils;
 
 import java.io.FileReader;
@@ -25,11 +25,11 @@ public class SettingsManager {
     public static SettingsManager INSTANCE;
     protected final HashMap<String, SettingBase> settingsMap = new HashMap<>();
     //Settings Here
-    private final EnumSetting<Source> sourceSetting = register(new EnumSetting<>("Sources", X -> {
+    private final EnumSetting<YTFork> sourceSetting = register(new EnumSetting<>("Fork", X -> {
         JFrameManager.INSTANCE.getSettingsFrame().getSource().setSelectedItem(X.getSelected());
-        System.out.println("Done");
+        System.out.println("Setting update applied.");
         return null;
-    }, Source.values(), Source.yt_dlp));
+    }, YTFork.values(), YTFork.yt_dlp));
 
     private <T> T register(SettingBase settingBase) {
         settingsMap.put(settingBase.getName().toLowerCase(Locale.ROOT), settingBase);

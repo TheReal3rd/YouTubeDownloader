@@ -10,18 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.sapher.youtubedl.YoutubeDL.getExecutablePath;
+
 /**
  * Used to start m3u8 downloads with youtube-dl
  */
 public class m3u8 {
-    protected static String executablePath = "python3 youtube-dl";
 
     protected static String buildCommand(String command) {
-        return String.format("%s %s", executablePath, command);
-    }
-
-    public static m3u8Response execute(m3u8Request request) throws YoutubeDLException {
-        return execute(request, null);
+        return String.format("%s %s", getExecutablePath(), command);
     }
 
     /**

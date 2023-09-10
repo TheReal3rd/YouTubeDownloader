@@ -4,7 +4,6 @@ import lombok.Getter;
 import me.third.right.youtubedl.YTDL;
 import me.third.right.youtubedl.manager.DownloadManager;
 import me.third.right.youtubedl.utils.FormatEnum;
-import me.third.right.youtubedl.utils.Utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -120,9 +119,11 @@ public class JFrameManager {
             if(downloadM3U8.isSelected()) {
                 JFrameManager.INSTANCE.downloadPlaylists.setVisible(false);
                 JFrameManager.INSTANCE.format.setVisible(false);
+                JFrameManager.INSTANCE.progress.setVisible(false);
             } else {
                 JFrameManager.INSTANCE.downloadPlaylists.setVisible(true);
                 JFrameManager.INSTANCE.format.setVisible(true);
+                JFrameManager.INSTANCE.progress.setVisible(true);
             }
         });
         downloadM3U8.setToolTipText("Download M3U8 video format and convert them.");

@@ -44,9 +44,7 @@ public class DownloadYTRunnable extends RunnableBase {
 
                 // Make request and return response;
                 final int finalI = i;
-                YoutubeDLResponse response = YoutubeDL.execute(request, (progress, etaInSeconds) -> {
-                    JFrameManager.INSTANCE.setProgress(progress, etaInSeconds, finalI, links.length);
-                });
+                YoutubeDLResponse response = YoutubeDL.execute(request, (progress, etaInSeconds) -> JFrameManager.INSTANCE.setProgress(progress, etaInSeconds, finalI, links.length));
 
                 // Response
                 String stdOut = response.out(); // Executable output
