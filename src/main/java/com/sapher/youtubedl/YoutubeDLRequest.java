@@ -3,6 +3,7 @@ package com.sapher.youtubedl;
 import lombok.Getter;
 import lombok.Setter;
 import me.third.right.youtubedl.YTDL;
+import me.third.right.youtubedl.manager.SettingsManager;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,16 +15,10 @@ import java.util.Map;
 @Getter
 @Setter
 public class YoutubeDLRequest {
-
-
     private String directory;
-
     private String url;
-
     private final Map<String, String> options = new HashMap<>();
-
     private boolean extractAudio = false;
-
     private String format = null;
 
     public void setOption(String key) {
@@ -62,6 +57,8 @@ public class YoutubeDLRequest {
         if (extractAudio) {
             builder.append("-x --audio-format %s ".formatted(format.toLowerCase()));
         }
+
+        builder.append("-o %s/%s ".formatted(directory, SettingsManager.INSTANCE.getYtRename().getValue()));
 
         if(YTDL.isWindows()) {
             builder.append("--no-check-certificate ");//Only happens on windows.

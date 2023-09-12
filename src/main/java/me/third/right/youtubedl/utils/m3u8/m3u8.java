@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.sapher.youtubedl.YoutubeDL.getExecutablePath;
+import static me.third.right.youtubedl.utils.Utils.mainPath;
 
 /**
  * Used to start m3u8 downloads with youtube-dl
@@ -30,7 +31,7 @@ public class m3u8 {
      */
     public static m3u8Response execute(m3u8Request request, DownloadProgressCallback callback) throws YoutubeDLException {
         String command = buildCommand(request.buildOptions());
-        String directory = request.getDirectory();
+        String directory = mainPath.toAbsolutePath().toString();
 
         System.out.println(command);
 

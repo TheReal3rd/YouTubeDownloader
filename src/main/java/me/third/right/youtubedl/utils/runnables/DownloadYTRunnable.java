@@ -8,6 +8,12 @@ import me.third.right.youtubedl.gui.JFrameManager;
 import me.third.right.youtubedl.utils.FormatEnum;
 import me.third.right.youtubedl.utils.Utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+
 import static me.third.right.youtubedl.utils.Utils.mainPath;
 
 /**
@@ -16,10 +22,12 @@ import static me.third.right.youtubedl.utils.Utils.mainPath;
 public class DownloadYTRunnable extends RunnableBase {
     private final FormatEnum format;
     private final String[] links;
+    private Path path;
 
     public DownloadYTRunnable(String[] links, FormatEnum format) {
         this.format = format;
         this.links = links;
+        path = mainPath.toAbsolutePath();
     }
 
     @Override
@@ -32,9 +40,27 @@ public class DownloadYTRunnable extends RunnableBase {
 
             final String text = s.trim();
             try {
+                if(text.startsWith("FCREATE")) {
+                    final String folderName = text.replaceFirst("FCREATE", "").replaceAll("[^a-zA-Z0-9]", " ").trim().replaceAll(" ", "-");//I Don't want to risk having a special character. IK some are supported.
+                    path = path.resolve(folderName);
+                    if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
+                        try {
+                            Files.createDirectory(path);
+                        } catch (IOException e) {
+                            Utils.displayMessage("Error", "Failed to create folder?");
+                            continue;
+                        }
+                    }
+                    continue;
+                } else if(text.startsWith("FBACK")) {
+                    path = new File(path.toString()+"/..").toPath();
+                    continue;
+                }
+
+
                 // Build request
                 YoutubeDLRequest request = new YoutubeDLRequest(text);
-                request.setDirectory(mainPath.toAbsolutePath().toString());
+                request.setDirectory(path.toString());
                 request.setExtractAudio(format.isAudio());
                 request.setFormat(format.getDisplay());
                 request.setOption("ignore-errors");

@@ -4,11 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.Getter;
-import me.third.right.youtubedl.gui.JFrameManager;
 import me.third.right.youtubedl.settings.EnumSetting;
 import me.third.right.youtubedl.settings.SettingBase;
-import me.third.right.youtubedl.utils.YTFork;
+import me.third.right.youtubedl.settings.StringSetting;
 import me.third.right.youtubedl.utils.Utils;
+import me.third.right.youtubedl.utils.YTFork;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,11 +25,19 @@ public class SettingsManager {
     public static SettingsManager INSTANCE;
     protected final HashMap<String, SettingBase> settingsMap = new HashMap<>();
     //Settings Here
+    // ** Universal
     private final EnumSetting<YTFork> sourceSetting = register(new EnumSetting<>("Fork", X -> {
-        JFrameManager.INSTANCE.getSettingsFrame().getSource().setSelectedItem(X.getSelected());
-        System.out.println("Setting update applied.");
+        for(YTFork x : YTFork.values()) {
+            Utils.deleteFile(Utils.mainPath.resolve(x.getName()));
+        }
+
+        Utils.displayMessage("Done", "Deleted all downloaders.");
         return null;
-    }, YTFork.values(), YTFork.yt_dlp));
+    }, "Select YTDL fork to use", "Deletes all YT Downloaders to redownload the latest versions.", YTFork.values(), YTFork.yt_dlp));
+    // ** YouTube
+    private final StringSetting ytRename = register(new StringSetting("YTRename", "%(title)s-%(id)s.%(ext)s", "Don't touch if you don't know what you're doing."));
+    // ** M3U8
+    private final StringSetting m3Rename = register(new StringSetting("M3U8Rename", "EP %d", "Reset the settings to default state."));
 
     private <T> T register(SettingBase settingBase) {
         settingsMap.put(settingBase.getName().toLowerCase(Locale.ROOT), settingBase);
@@ -48,7 +56,7 @@ public class SettingsManager {
             final JsonObject obj = jsonParser.parse(reader).getAsJsonObject();
 
             for(Map.Entry<String, JsonElement> e : obj.entrySet()) {
-                //if (!e.getValue().isJsonObject()) continue;This fixed an issue.
+                if (!e.getValue().isJsonPrimitive()) continue;
 
                 final SettingBase setting = getSetting(e.getKey());
                 if (setting == null) continue;

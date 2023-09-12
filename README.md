@@ -8,20 +8,25 @@
 
 <p align="center"> <b> Description </b> </p>
 <p> Mass Download YouTube video and convert them into desired formats. </p>
-<p> For personal use any issues will be looked into, but you shouldn't expect me fixing anything. </p>
+<p> For personal use any issues may or may not be looked into and fixed. </p>
 
 <p align="center"> <b> Usage: </b> </p>
 <p> 1. Paste YouTube video urls within the main text area or open a text document. </p>
 <p> 2. For multiple video download split each url with a new line this applies to the text document as well. </p>
 <p> 3. Configure the settings located at the bottom. </p>
-<p> 3. Then click start wait until the finish message appears then you're all set. </p>
+<p> 4. Then click start wait until the finish message appears then you're all set. </p>
 
 <p align="center"> <b> Requirements: </b> </p>
 <p> Requires Python3+ to be installed. (Use the App Store versions it's the only version that's been tested.) </p>
+<p> FFMpeg installed for linux. </p>
 
 <p align="center"> <b> Supported Platforms: </b> </p>
 <p> Linux works the best. </p>
 <p> Windows works but its hacky and I don't care enough to fix. </p>
+
+
+<p align="center"> <b> TODO: </b> </p>
+<p> Combine the YT and M3U8 Runnable together. </p>
 
 <details>
 <summary> Libs / Credits: </summary>

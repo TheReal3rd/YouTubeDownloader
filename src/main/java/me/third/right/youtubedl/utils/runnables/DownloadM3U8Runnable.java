@@ -7,6 +7,12 @@ import me.third.right.youtubedl.utils.m3u8.m3u8;
 import me.third.right.youtubedl.utils.m3u8.m3u8Request;
 import me.third.right.youtubedl.utils.m3u8.m3u8Response;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+
 import static me.third.right.youtubedl.utils.Utils.mainPath;
 
 /**
@@ -14,9 +20,12 @@ import static me.third.right.youtubedl.utils.Utils.mainPath;
  */
 public class DownloadM3U8Runnable extends RunnableBase {
     private final String[] links;
+    private int offset = 0;
+    private Path path;
 
     public DownloadM3U8Runnable(String[] links) {
         this.links = links;
+        path = mainPath.toAbsolutePath();
     }
 
     @Override
@@ -29,9 +38,31 @@ public class DownloadM3U8Runnable extends RunnableBase {
 
             final String text = s.trim();
             try {
+                if(text.startsWith("FCREATE")) {
+                    final String folderName = text.replaceFirst("FCREATE", "").replaceAll("[^a-zA-Z0-9]", " ").trim().replaceAll(" ", "-");//I Don't want to risk having a special character. IK some are supported.
+                    path = path.resolve(folderName);
+                    offset++;
+                    if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
+                        try {
+                            Files.createDirectory(path);
+                        } catch (IOException e) {
+                            Utils.displayMessage("Error", "Failed to create folder?");
+                            continue;
+                        }
+                    }
+                    continue;
+                } else if(text.startsWith("FBACK")) {
+                    path = new File(path.toString()+"/..").toPath();
+                    offset++;
+                    continue;
+                } else if(text.startsWith("COUNTER_RESET")) {
+                    offset = offset + i;
+                    continue;
+                }
+
                 // Build request
-                m3u8Request request = new m3u8Request(text, i + 1);
-                request.setDirectory(mainPath.toAbsolutePath().toString());
+                m3u8Request request = new m3u8Request(text, (i + 1) - offset);
+                request.setDirectory(path.toString());
 
                 // Make request and return response;
                 final int finalI = i;

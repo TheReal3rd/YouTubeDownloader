@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import static me.third.right.youtubedl.utils.Utils.mainPath;
+
 /**
  * <p>Provide an interface for youtube-dl executable</p>
  *
@@ -58,7 +60,7 @@ public class YoutubeDL {
      */
     public static YoutubeDLResponse execute(YoutubeDLRequest request, DownloadProgressCallback callback) throws YoutubeDLException {
         String command = buildCommand(request.buildOptions());
-        String directory = request.getDirectory();
+        String directory = mainPath.toAbsolutePath().toString();
         Map<String, String> options = request.getOptions();
 
         System.out.println(command);

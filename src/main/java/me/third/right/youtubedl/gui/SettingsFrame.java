@@ -2,16 +2,15 @@ package me.third.right.youtubedl.gui;
 
 import lombok.Getter;
 import me.third.right.youtubedl.manager.SettingsManager;
-import me.third.right.youtubedl.utils.YTFork;
-import me.third.right.youtubedl.utils.Utils;
+import me.third.right.youtubedl.settings.SettingBase;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class SettingsFrame {
     @Getter private final JFrame frame;
 
-    @Getter private final JComboBox<YTFork> source;
     public SettingsFrame() {
         frame = new JFrame("Settings");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -22,39 +21,29 @@ public class SettingsFrame {
         topPanel.setBackground(Color.lightGray);
         frame.add(topPanel);
 
-        //TODO find the best way to link setting manager to the GUI. (Automatic)
-        final Label textArea = new Label();
-        textArea.setText("YTDL Fork");
-        topPanel.add(textArea);
+        final JPanel midPanel = new JPanel(new GridBagLayout());
+        midPanel.setBackground(Color.lightGray);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10, 10, 10, 10);
 
-        source = new JComboBox<>(YTFork.values());
-        source.setBackground(Color.LIGHT_GRAY);
-        source.addActionListener(X -> {
-            SettingsManager.INSTANCE.getSourceSetting().setSelected(source.getItemAt(source.getSelectedIndex()));
-            SettingsManager.INSTANCE.saveSettings();
-        });
-        source.setToolTipText("Select YT-DL fork you wish to use.");
-        topPanel.add(source);
+        int yGrid = 0;
+        for (Map.Entry<String, SettingBase> entry : SettingsManager.INSTANCE.getSettingsMap().entrySet()) {
+            constraints.gridy = yGrid;
+            entry.getValue().getComponents(midPanel, constraints);
+            yGrid++;
+        }
+        constraints.anchor = GridBagConstraints.CENTER;
+        midPanel.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(), "Settings: "));
 
-        final JButton reset = new JButton("RESET");
-        reset.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        reset.setPreferredSize(new  Dimension(80, 30));
-        reset.setBackground(Color.LIGHT_GRAY);
-        reset.addActionListener(X -> {
-
-            for(YTFork x : YTFork.values()) {
-                Utils.deleteFile(Utils.mainPath.resolve(x.getName()));
-            }
-
-            Utils.displayMessage("Done", "Deleted all downloaders.");
-        });
-        reset.setToolTipText("Deletes all YT Downloaders to redownload the latest versions.");
-        topPanel.add(reset);
+        topPanel.add(midPanel, constraints);
 
         frame.pack();
         frame.setSize(490, 290);
         frame.setResizable(false);
         frame.setVisible(false);
+        frame.setLocationRelativeTo(null);
     }
 
     public void setVisible(boolean visible) {

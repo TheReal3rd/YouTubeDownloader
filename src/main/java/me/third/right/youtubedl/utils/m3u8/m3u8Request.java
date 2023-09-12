@@ -2,6 +2,7 @@ package me.third.right.youtubedl.utils.m3u8;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.third.right.youtubedl.manager.SettingsManager;
 
 /**
  * m3u8 request
@@ -34,8 +35,8 @@ public class m3u8Request {
         if (url != null)
             builder.append(url).append(" ");
 
-        builder.append("-o EP %d".formatted(this.id));//TODO add an option / method to split this to seasons and different name.
-
+        final String rename = SettingsManager.INSTANCE.getM3Rename().getValue().formatted(this.id);//Spaces don't work lol. TODO fix this.
+        builder.append("-o %s/%s.mp4".formatted(directory, rename.replaceAll(" ","-")));
         return builder.toString().trim();
     }
 }
