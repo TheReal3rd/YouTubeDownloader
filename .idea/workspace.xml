@@ -4,27 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and cleanup.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/StringSetting.java" afterDir="false" />
+    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and Improvements.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/utils/StreamGobbler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/utils/StreamGobbler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/utils/StreamProcessExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/utils/StreamProcessExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/gui/SettingsFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/DownloadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/DownloadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/SettingsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/EnumSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/EnumSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/SettingBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/settings/SettingBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/YTFork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/YTFork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadM3U8Runnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadM3U8Runnable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadYTRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadYTRunnable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694375909430</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixes and Improvements.">
+      <created>1694512412714</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1694512412714</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,7 +190,8 @@
     <MESSAGE value="Incomplete improvements. SSL issue." />
     <MESSAGE value="Figured it out." />
     <MESSAGE value="Fixes and cleanup." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes and cleanup." />
+    <MESSAGE value="Fixes and Improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes and Improvements." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -20,7 +20,7 @@ import static me.third.right.youtubedl.utils.Utils.mainPath;
  */
 public class DownloadM3U8Runnable extends RunnableBase {
     private final String[] links;
-    private int offset = 0;
+    private int counter = 1;
     private Path path;
 
     public DownloadM3U8Runnable(String[] links) {
@@ -41,7 +41,6 @@ public class DownloadM3U8Runnable extends RunnableBase {
                 if(text.startsWith("FCREATE")) {
                     final String folderName = text.replaceFirst("FCREATE", "").replaceAll("[^a-zA-Z0-9]", " ").trim().replaceAll(" ", "-");//I Don't want to risk having a special character. IK some are supported.
                     path = path.resolve(folderName);
-                    offset++;
                     if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
                         try {
                             Files.createDirectory(path);
@@ -53,15 +52,15 @@ public class DownloadM3U8Runnable extends RunnableBase {
                     continue;
                 } else if(text.startsWith("FBACK")) {
                     path = new File(path.toString()+"/..").toPath();
-                    offset++;
                     continue;
                 } else if(text.startsWith("COUNTER_RESET")) {
-                    offset = offset + i;
+                    counter = 1;
                     continue;
                 }
 
                 // Build request
-                m3u8Request request = new m3u8Request(text, (i + 1) - offset);
+                m3u8Request request = new m3u8Request(text, counter);
+                counter++;
                 request.setDirectory(path.toString());
 
                 // Make request and return response;
