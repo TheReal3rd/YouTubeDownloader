@@ -8,7 +8,7 @@ import me.third.right.youtubedl.utils.Utils;
 public class YTDL {
     private static boolean isWindows;
     public final static String name = "YouTube Downloader";
-    public final static String version = "1.5";
+    public final static String version = "1.6";
 
     public static void main(String[] args) {
         System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,TLSv1");//Important.

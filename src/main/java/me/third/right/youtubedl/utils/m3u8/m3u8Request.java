@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import me.third.right.youtubedl.manager.SettingsManager;
 
+import java.util.ArrayList;
+
 /**
  * m3u8 request
  */
@@ -29,14 +31,15 @@ public class m3u8Request {
      * Transform options to a string that the executable will execute
      * @return Command string
      */
-    protected String buildOptions() {
-        final StringBuilder builder = new StringBuilder();
+    protected String[] buildOptions() {
+        final ArrayList<String> commandBuild = new ArrayList<>();
 
         if (url != null)
-            builder.append(url).append(" ");
+            commandBuild.add(url);
 
         final String rename = SettingsManager.INSTANCE.getM3Rename().getValue().formatted(this.id);//Spaces don't work lol. TODO fix this.
-        builder.append("-o %s/%s.mp4".formatted(directory, rename.replaceAll(" ","-")));
-        return builder.toString().trim();
+        commandBuild.add("-o");
+        commandBuild.add("%s/%s.mp4".formatted(directory, rename));
+        return commandBuild.toArray(new String[0]);
     }
 }

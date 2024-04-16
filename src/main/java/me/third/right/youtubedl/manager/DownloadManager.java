@@ -3,13 +3,11 @@ package me.third.right.youtubedl.manager;
 import lombok.Getter;
 import lombok.Setter;
 import me.third.right.youtubedl.YTDL;
-import me.third.right.youtubedl.gui.JFrameManager;
 import me.third.right.youtubedl.settings.EnumSetting;
 import me.third.right.youtubedl.utils.FormatEnum;
 import me.third.right.youtubedl.utils.Utils;
 import me.third.right.youtubedl.utils.YTFork;
-import me.third.right.youtubedl.utils.runnables.DownloadM3U8Runnable;
-import me.third.right.youtubedl.utils.runnables.DownloadYTRunnable;
+import me.third.right.youtubedl.utils.runnables.DownloadCombinedRunnable;
 import me.third.right.youtubedl.utils.runnables.RunnableBase;
 
 import java.io.IOException;
@@ -67,11 +65,7 @@ public class DownloadManager {
             }
         }
 
-        if(JFrameManager.INSTANCE.getDownloadM3U8().isSelected()) {
-            downloadRunnable = new DownloadM3U8Runnable(links);
-        } else {
-            downloadRunnable = new DownloadYTRunnable(links, format);
-        }
+        downloadRunnable = new DownloadCombinedRunnable(links);
         thread = new Thread(downloadRunnable);
         thread.start();
     }

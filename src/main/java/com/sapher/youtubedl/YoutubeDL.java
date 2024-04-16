@@ -12,6 +12,8 @@ import me.third.right.youtubedl.manager.SettingsManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -30,15 +32,18 @@ public class YoutubeDL {
     /**
      * Youtube-dl executable name
      */
-    public static String executablePath = "python3 %s";
+    public static String executablePath = "python3 %s/%s";
 
     /**
      * Append executable name to command
      * @param command Command string
      * @return Command string
      */
-    protected static String buildCommand(String command) {
-        return String.format("%s %s", getExecutablePath(), command);
+    protected static String[] buildCommand(String[] command) {
+        final ArrayList<String> commandBuild = new ArrayList<>();
+        commandBuild.addAll(List.of(getExecutablePath()));
+        commandBuild.addAll(List.of(command));
+        return commandBuild.toArray(new String[0]);
     }
 
     /**
@@ -59,11 +64,11 @@ public class YoutubeDL {
      * @throws YoutubeDLException
      */
     public static YoutubeDLResponse execute(YoutubeDLRequest request, DownloadProgressCallback callback) throws YoutubeDLException {
-        String command = buildCommand(request.buildOptions());
+        String[] command = buildCommand(request.buildOptions());
         String directory = mainPath.toAbsolutePath().toString();
         Map<String, String> options = request.getOptions();
 
-        System.out.println(command);
+        System.out.println(Arrays.toString(command));
 
         Process process;
         int exitCode;
@@ -71,9 +76,7 @@ public class YoutubeDL {
         StringBuffer errBuffer = new StringBuffer(); //stderr
         long startTime = System.nanoTime();
 
-        String[] split = command.split(" ");
-
-        ProcessBuilder processBuilder = new ProcessBuilder(split);
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
 
         // Define directory if one is passed
         if(directory != null)
@@ -109,7 +112,12 @@ public class YoutubeDL {
         }
 
         int elapsedTime = (int) ((System.nanoTime() - startTime) / 1000000);
-        return new YoutubeDLResponse(command, options, directory, exitCode , elapsedTime, out, err);
+
+        final StringBuilder stringBuilder = new StringBuilder();
+        for(String string : command) {
+            stringBuilder.append(string);
+        }
+        return new YoutubeDLResponse(stringBuilder.toString(), options, directory, exitCode , elapsedTime, out, err);
     }
 
 
@@ -199,7 +207,8 @@ public class YoutubeDL {
      * Get command executable or path to the executable
      * @return path string
      */
-    public static String getExecutablePath(){
-        return executablePath.formatted(SettingsManager.INSTANCE.getSourceSetting().getSelected().getName());
+    public static String[] getExecutablePath(){
+        //return executablePath.formatted(mainPath.toAbsolutePath().toString().replaceAll(" ", "\\\\ "), SettingsManager.INSTANCE.getSourceSetting().getSelected().getName());
+        return new String[] {"python3", (mainPath.toAbsolutePath().toString()+ "/" + SettingsManager.INSTANCE.getSourceSetting().getSelected().getName()) };
     }
 }

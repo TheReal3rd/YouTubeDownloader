@@ -9,6 +9,9 @@ import me.third.right.youtubedl.manager.DownloadManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.sapher.youtubedl.YoutubeDL.getExecutablePath;
 import static me.third.right.youtubedl.utils.Utils.mainPath;
@@ -18,8 +21,11 @@ import static me.third.right.youtubedl.utils.Utils.mainPath;
  */
 public class m3u8 {
 
-    protected static String buildCommand(String command) {
-        return String.format("%s %s", getExecutablePath(), command);
+    protected static String[] buildCommand(String[] command) {
+        final ArrayList<String> commandBuild = new ArrayList<>();
+        commandBuild.addAll(List.of(getExecutablePath()));
+        commandBuild.addAll(List.of(command));
+        return commandBuild.toArray(new String[0]);
     }
 
     /**
@@ -30,10 +36,10 @@ public class m3u8 {
      * @throws YoutubeDLException
      */
     public static m3u8Response execute(m3u8Request request, DownloadProgressCallback callback) throws YoutubeDLException {
-        String command = buildCommand(request.buildOptions());
+        String[] command = buildCommand(request.buildOptions());
         String directory = mainPath.toAbsolutePath().toString();
 
-        System.out.println(command);
+        System.out.println(Arrays.toString(command));
 
         Process process;
         int exitCode;
@@ -41,8 +47,7 @@ public class m3u8 {
         StringBuffer errBuffer = new StringBuffer(); //stderr
         long startTime = System.nanoTime();
 
-        String[] split = command.split(" ");
-        ProcessBuilder processBuilder = new ProcessBuilder(split);
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
 
         // Define directory if one is passed
         if(directory != null)
@@ -80,6 +85,11 @@ public class m3u8 {
 
         int elapsedTime = (int) ((System.nanoTime() - startTime) / 1000000);
 
-        return new m3u8Response(command, directory, exitCode , elapsedTime, out, err);
+        final StringBuilder stringBuilder = new StringBuilder();
+        for(String string : command) {
+            stringBuilder.append(string);
+        }
+
+        return new m3u8Response(stringBuilder.toString(), directory, exitCode , elapsedTime, out, err);
     }
 }

@@ -5,6 +5,7 @@ import lombok.Setter;
 import me.third.right.youtubedl.YTDL;
 import me.third.right.youtubedl.manager.SettingsManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,16 +53,19 @@ public class YoutubeDLRequest {
      * Transform options to a string that the executable will execute
      * @return Command string
      */
-    protected String buildOptions() {
-        final StringBuilder builder = new StringBuilder();
+    protected String[] buildOptions() {
+        final ArrayList<String> commandBuild = new ArrayList<>();
         if (extractAudio) {
-            builder.append("-x --audio-format %s ".formatted(format.toLowerCase()));
+            commandBuild.add("-x");
+            commandBuild.add("--audio-format");
+            commandBuild.add(format.toLowerCase());
         }
 
-        builder.append("-o %s/%s ".formatted(directory, SettingsManager.INSTANCE.getYtRename().getValue()));
+        commandBuild.add("-o");
+        commandBuild.add("%s/%s".formatted(directory, SettingsManager.INSTANCE.getYtRename().getValue()));
 
         if(YTDL.isWindows()) {
-            builder.append("--no-check-certificate ");//Only happens on windows.
+            commandBuild.add("--no-check-certificate");//Only happens on windows.
         }
 
         // Build options strings
@@ -74,20 +78,25 @@ public class YoutubeDLRequest {
 
             if (value == null) value = "";
 
-            String optionFormatted = String.format("--%s %s", name, value).trim();
-            builder.append(optionFormatted).append(" ");
+            commandBuild.add("--%s".formatted(name.trim()));
+            if (!value.trim().isEmpty())
+                commandBuild.add(value.trim());
 
             it.remove();
         }
 
         if (!extractAudio) {
-            builder.append("--format bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best --merge-output-format %s ".formatted(format.toLowerCase()));
+            commandBuild.add("--format");
+            commandBuild.add("bestvideo+bestaudio[ext=m4a]/bestvideo+bestaudio/best");
+            commandBuild.add("--merge-output-format");
+            commandBuild.add(format.toLowerCase());
         }
 
         // Set Url
         if (url != null)
-            builder.append(url).append(" ");
+            commandBuild.add(url);
 
-        return builder.toString().trim();
+        commandBuild.removeIf(String::isEmpty);
+        return commandBuild.toArray(new String[0]);
     }
 }

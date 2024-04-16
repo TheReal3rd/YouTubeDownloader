@@ -15,7 +15,7 @@ apply plugin: 'io.github.fvarrui.javapackager.plugin'
 
 
 group 'me.third.right.youtubedl'
-version '1.5'
+version '1.6'
 
 repositories {
     maven { url 'https://jitpack.io' }
