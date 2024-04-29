@@ -8,13 +8,25 @@
 
 <p align="center"> <b> Description </b> </p>
 <p> Mass Download YouTube video and convert them into desired formats. </p>
-<p> For personal use any issues may or may not be looked into and fixed. </p>
+<p> For personal use any issues may or may not be looked into or fixed. </p>
 
-<p align="center"> <b> Usage: </b> </p>
+<p align="center"> <b> Usage 1: </b> </p>
 <p> 1. Paste YouTube video urls within the main text area or open a text document. </p>
 <p> 2. For multiple video download split each url with a new line this applies to the text document as well. </p>
 <p> 3. Configure the settings located at the bottom. </p>
 <p> 4. Then click start wait until the finish message appears then you're all set. </p>
+
+<p align="center"> <b> Usage 2 (Commands): </b> </p>
+<p> 1. You can enter a list of commands separated by new lines. </p>
+<p> 2. FCREATE [Name] - Creates a new directory and move to it. </p>
+<p> 3. FBACK - Moves back by one directory. </p>
+<p> 4. FORMAT [MP3, MP4, MKV, M4A] - Changes the format. </p>
+<p> 5. MODE [M3U8, YT] - Changes the mode. </p>
+<p> 6. META_ARTIST [Name] - Writes artists Metadata only for Audio formats. </p>
+<p> 7. META_ALBUM [Name] - Writes album Metadata only for Audio formats. </p>
+<p> 8. META_CLEAR - Clears all Metadata. </p>
+<p> 9. PLAYLIST_ON - Toggles on Playlist downloads. </p>
+<p> 10. PLAYLIST_OFF - Toggles off Playlist downloads. </p>
 
 <p align="center"> <b> Requirements: </b> </p>
 <p> Requires Python3+ to be installed. (Use the App Store versions it's the only version that's been tested.) </p>
@@ -24,9 +36,8 @@
 <p> Linux works the best. </p>
 <p> Windows works but its hacky and I don't care enough to fix. </p>
 
-
 <p align="center"> <b> TODO: </b> </p>
-<p> Combine the YT and M3U8 Runnable together. </p>
+<p> Add YT Archive for Streams. </p>
 
 <details>
 <summary> Libs / Credits: </summary>

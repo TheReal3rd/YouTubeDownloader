@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and Improvements.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadCombinedRunnable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/YTDL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/DownloadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/manager/DownloadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/m3u8/m3u8Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadM3U8Runnable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadYTRunnable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadCombinedRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadCombinedRunnable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +46,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2IBsjTsvmETm739DVzJB3H6SANk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -192,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694512412714</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands.">
+      <option name="closed" value="true" />
+      <created>1713255908497</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713255908497</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,7 +216,8 @@
     <MESSAGE value="Figured it out." />
     <MESSAGE value="Fixes and cleanup." />
     <MESSAGE value="Fixes and Improvements." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes and Improvements." />
+    <MESSAGE value="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

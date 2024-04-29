@@ -22,6 +22,9 @@ public class YoutubeDLRequest {
     private boolean extractAudio = false;
     private String format = null;
 
+    private String artist = "";
+    private String album = "";
+
     public void setOption(String key) {
         options.put(key, null);
     }
@@ -62,10 +65,23 @@ public class YoutubeDLRequest {
         }
 
         commandBuild.add("-o");
-        commandBuild.add("%s/%s".formatted(directory, SettingsManager.INSTANCE.getYtRename().getValue()));
+        commandBuild.add(("%s/%s".formatted(directory, SettingsManager.INSTANCE.getYtRename().getValue())).replaceAll(" ", "\\ "));
 
         if(YTDL.isWindows()) {
             commandBuild.add("--no-check-certificate");//Only happens on windows.
+        }
+
+        if(!artist.isEmpty() || !album.isEmpty()) {
+            commandBuild.add("--add-metadata");
+            commandBuild.add("--postprocessor-args");
+            final StringBuilder value = new StringBuilder();
+            if(!artist.isEmpty()) {
+                value.append("-metadata artist=%s ".formatted(artist.replaceAll(" ", "\\\\ ")));
+            }
+            if(!album.isEmpty()) {
+                value.append("-metadata album=%s".formatted(album.replaceAll(" ", "\\\\ ")));
+            }
+            commandBuild.add(value.toString());
         }
 
         // Build options strings

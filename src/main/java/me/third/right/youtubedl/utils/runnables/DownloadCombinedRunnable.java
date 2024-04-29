@@ -11,7 +11,6 @@ import me.third.right.youtubedl.utils.m3u8.m3u8;
 import me.third.right.youtubedl.utils.m3u8.m3u8Request;
 import me.third.right.youtubedl.utils.m3u8.m3u8Response;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -29,6 +28,8 @@ public class DownloadCombinedRunnable extends RunnableBase {
 
     // * YouTubeDL
     private boolean playList;
+    private String artist = "";
+    private String album = "";
     // * M3U8
 
     public DownloadCombinedRunnable(String[] links) {
@@ -53,11 +54,13 @@ public class DownloadCombinedRunnable extends RunnableBase {
             }
 
             final String text = s.trim();
+            if (text.isEmpty()) continue;
+
             try {
                 final String upperText = text.toUpperCase();
                 if(upperText.startsWith("FCREATE")) {
                     final String folderName = text.replaceFirst("FCREATE", "").replaceAll("[^a-zA-Z0-9]", " ").trim().replaceAll(" ", "-");//I Don't want to risk having a special character. IK some are supported.
-                    path = path.resolve(folderName);
+                    path = path.resolve(folderName).normalize();
                     if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
                         try {
                             Files.createDirectory(path);
@@ -68,7 +71,8 @@ public class DownloadCombinedRunnable extends RunnableBase {
                     }
                     continue;
                 } else if(upperText.startsWith("FBACK")) {
-                    path = new File(path.toString()+"/..").toPath();
+                    path = path.resolve("/..").normalize();
+                    //path = new File(path.toString()+"/..").toPath().normalize();
                     continue;
                 } else if((upperText.startsWith("COUNTER_RESET") || upperText.startsWith("RESET_COUNTER")) && this.currentMode.equals(Mode.FFMPEG)) {
                     counter = 1;
@@ -105,6 +109,16 @@ public class DownloadCombinedRunnable extends RunnableBase {
                 } else if(upperText.startsWith("PLAYLIST_OFF") && this.currentMode.equals(Mode.YouTubeDL)) {
                     playList = false;
                     continue;
+                } else if(upperText.startsWith("META_ARTIST") && this.currentMode.equals(Mode.YouTubeDL)) {
+                    artist = text.replaceFirst("META_ARTIST ", "");
+                    continue;
+                } else if(upperText.startsWith("META_ALBUM") && this.currentMode.equals(Mode.YouTubeDL)) {
+                    album = text.replaceFirst("META_ALBUM ", "");
+                    continue;
+                } else if(upperText.startsWith("META_CLEAR") && this.currentMode.equals(Mode.YouTubeDL)) {
+                    album = "";
+                    artist = "";
+                    continue;
                 }
 
 
@@ -117,8 +131,12 @@ public class DownloadCombinedRunnable extends RunnableBase {
                         request.setFormat(format.getDisplay());
                         request.setOption("ignore-errors");
                         request.setOption("retries", 10);
+                        if(format.isAudio())
+                            request.setOption("embed-thumbnail");
 
                         request.setOption(playList ? "yes-playlist" : "no-playlist");
+                        request.setAlbum(album);
+                        request.setArtist(artist);
 
                         // Make request and return response;
                         final int finalI = i;
@@ -126,7 +144,7 @@ public class DownloadCombinedRunnable extends RunnableBase {
 
                         // Response
                         String stdOut = response.out(); // Executable output
-                        //System.out.println(stdOut);
+                        System.out.println(stdOut);
                     } case FFMPEG -> {
                         // Build request
                         m3u8Request request = new m3u8Request(text, counter);
@@ -139,7 +157,7 @@ public class DownloadCombinedRunnable extends RunnableBase {
 
                         // Response
                         String stdOut = response.out(); // Executable output
-                        //System.out.println(stdOut);
+                        System.out.println(stdOut);
                     }
                 }
             } catch (YoutubeDLException e) {
