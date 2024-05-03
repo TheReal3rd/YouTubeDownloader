@@ -27,6 +27,8 @@
 <p> 8. META_CLEAR - Clears all Metadata. </p>
 <p> 9. PLAYLIST_ON - Toggles on Playlist downloads. </p>
 <p> 10. PLAYLIST_OFF - Toggles off Playlist downloads. </p>
+<p> 11. FMETA_ARTIST [Name] - Creates folder with artist name and sets metadata artist. </p>
+<p> 12. FMETA_ALBUM [Name] - Creates folder with album name and sets metadata album. </p>
 
 <p align="center"> <b> Requirements: </b> </p>
 <p> Requires Python3+ to be installed. (Use the App Store versions it's the only version that's been tested.) </p>

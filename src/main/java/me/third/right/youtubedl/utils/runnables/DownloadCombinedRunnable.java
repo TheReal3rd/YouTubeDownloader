@@ -11,6 +11,7 @@ import me.third.right.youtubedl.utils.m3u8.m3u8;
 import me.third.right.youtubedl.utils.m3u8.m3u8Request;
 import me.third.right.youtubedl.utils.m3u8.m3u8Response;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -59,20 +60,14 @@ public class DownloadCombinedRunnable extends RunnableBase {
             try {
                 final String upperText = text.toUpperCase();
                 if(upperText.startsWith("FCREATE")) {
-                    final String folderName = text.replaceFirst("FCREATE", "").replaceAll("[^a-zA-Z0-9]", " ").trim().replaceAll(" ", "-");//I Don't want to risk having a special character. IK some are supported.
-                    path = path.resolve(folderName).normalize();
-                    if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
-                        try {
-                            Files.createDirectory(path);
-                        } catch (IOException e) {
-                            Utils.displayMessage("Error", "Failed to create folder?");
-                            continue;
-                        }
-                    }
+                    // Old filter .replaceAll("[^a-zA-Z0-9]", " ").replaceAll(" ", "-")
+                    //I Don't want to risk having a special character. IK some are supported. TODO fix special we replace one
+                    final String folderName = text.replaceFirst("FCREATE", "").trim().replaceAll(" ", "\\ ");
+                    path = createFolder(path, folderName);
                     continue;
                 } else if(upperText.startsWith("FBACK")) {
-                    path = path.resolve("/..").normalize();
-                    //path = new File(path.toString()+"/..").toPath().normalize();
+                    //path = path.resolve("/..").normalize();
+                    path = new File(path.toString()+"/..").toPath().normalize();
                     continue;
                 } else if((upperText.startsWith("COUNTER_RESET") || upperText.startsWith("RESET_COUNTER")) && this.currentMode.equals(Mode.FFMPEG)) {
                     counter = 1;
@@ -110,14 +105,24 @@ public class DownloadCombinedRunnable extends RunnableBase {
                     playList = false;
                     continue;
                 } else if(upperText.startsWith("META_ARTIST") && this.currentMode.equals(Mode.YouTubeDL)) {
-                    artist = text.replaceFirst("META_ARTIST ", "");
+                    artist = text.replaceFirst("META_ARTIST ", "").trim();
                     continue;
                 } else if(upperText.startsWith("META_ALBUM") && this.currentMode.equals(Mode.YouTubeDL)) {
-                    album = text.replaceFirst("META_ALBUM ", "");
+                    album = text.replaceFirst("META_ALBUM ", "").trim();
                     continue;
                 } else if(upperText.startsWith("META_CLEAR") && this.currentMode.equals(Mode.YouTubeDL)) {
                     album = "";
                     artist = "";
+                    continue;
+                } else if(upperText.startsWith("FMETA_ARTIST") && this.currentMode.equals(Mode.YouTubeDL)) {
+                    final String artistName = text.replaceFirst("FMETA_ARTIST", "").trim().replaceAll(" ", "\\ ");
+                    artist = text.replaceFirst("FMETA_ARTIST", "").trim();
+                    path = createFolder(path, artistName);
+                    continue;
+                } else if(upperText.startsWith("FMETA_ALBUM") && this.currentMode.equals(Mode.YouTubeDL)) {
+                    final String albumName = text.replaceFirst("FMETA_ALBUM", "").trim().replaceAll(" ", "\\ ");
+                    album = text.replaceFirst("FMETA_ALBUM", "").trim();
+                    path = createFolder(path, albumName);
                     continue;
                 }
 
@@ -181,5 +186,18 @@ public class DownloadCombinedRunnable extends RunnableBase {
     private enum Mode {
         YouTubeDL,
         FFMPEG
+    }
+
+    private Path createFolder(Path currentPath, String folderName) {
+        Path path = currentPath.resolve(folderName).normalize();
+        if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
+            try {
+                Files.createDirectory(path);
+            } catch (IOException e) {
+                Utils.displayMessage("Error", "Failed to create folder?");
+                return null;
+            }
+        }
+        return path;
     }
 }

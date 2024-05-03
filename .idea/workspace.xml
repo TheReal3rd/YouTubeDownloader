@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands.">
+    <list default="true" id="df802900-3501-4820-bae1-12cc6b591ae1" name="Changes" comment="Fixes and Improvements.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sapher/youtubedl/YoutubeDLRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadCombinedRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/third/right/youtubedl/utils/runnables/DownloadCombinedRunnable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713255908497</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixes and Improvements.">
+      <option name="closed" value="true" />
+      <created>1714369534050</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1714369534050</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,9 +222,9 @@
     <MESSAGE value="Incomplete improvements. SSL issue." />
     <MESSAGE value="Figured it out." />
     <MESSAGE value="Fixes and cleanup." />
-    <MESSAGE value="Fixes and Improvements." />
     <MESSAGE value="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes and Improvements.&#10;Added Space support.&#10;Added more commands." />
+    <MESSAGE value="Fixes and Improvements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes and Improvements." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
