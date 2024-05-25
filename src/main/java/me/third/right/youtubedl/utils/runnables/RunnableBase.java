@@ -3,8 +3,9 @@ package me.third.right.youtubedl.utils.runnables;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 public class RunnableBase implements Runnable {
-    @Setter @Getter
+    @Setter
     private boolean stopping = false;
 
     @Override

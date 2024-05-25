@@ -60,13 +60,10 @@ public class DownloadCombinedRunnable extends RunnableBase {
             try {
                 final String upperText = text.toUpperCase();
                 if(upperText.startsWith("FCREATE")) {
-                    // Old filter .replaceAll("[^a-zA-Z0-9]", " ").replaceAll(" ", "-")
-                    //I Don't want to risk having a special character. IK some are supported. TODO fix special we replace one
                     final String folderName = text.replaceFirst("FCREATE", "").trim().replaceAll(" ", "\\ ");
                     path = createFolder(path, folderName);
                     continue;
                 } else if(upperText.startsWith("FBACK")) {
-                    //path = path.resolve("/..").normalize();
                     path = new File(path.toString()+"/..").toPath().normalize();
                     continue;
                 } else if((upperText.startsWith("COUNTER_RESET") || upperText.startsWith("RESET_COUNTER")) && this.currentMode.equals(Mode.FFMPEG)) {
