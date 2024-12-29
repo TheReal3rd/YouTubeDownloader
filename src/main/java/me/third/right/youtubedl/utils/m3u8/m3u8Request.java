@@ -37,6 +37,12 @@ public class m3u8Request {
         if (url != null)
             commandBuild.add(url);
 
+        final String cookiesType = SettingsManager.INSTANCE.getCookiesType().getValue();
+        if(!cookiesType.equalsIgnoreCase("none")){
+            commandBuild.add("--cookies-from-browser");
+            commandBuild.add(cookiesType);
+        }
+
         final String rename = SettingsManager.INSTANCE.getM3Rename().getValue().formatted(this.id);//Spaces don't work lol. TODO fix this.
         commandBuild.add("-o");
         commandBuild.add("%s/%s.mp4".formatted(directory, rename));

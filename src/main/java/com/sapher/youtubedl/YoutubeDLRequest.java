@@ -71,6 +71,12 @@ public class YoutubeDLRequest {
             commandBuild.add("--no-check-certificate");//Only happens on windows.
         }
 
+        final String cookiesType = SettingsManager.INSTANCE.getCookiesType().getValue();
+        if(!cookiesType.equalsIgnoreCase("none")){
+            commandBuild.add("--cookies-from-browser");
+            commandBuild.add(cookiesType);
+        }
+
         if(!artist.isEmpty() || !album.isEmpty()) {
             commandBuild.add("--add-metadata");
             commandBuild.add("--postprocessor-args");

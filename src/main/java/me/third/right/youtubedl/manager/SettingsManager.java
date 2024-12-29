@@ -38,6 +38,9 @@ public class SettingsManager {
     private final StringSetting ytRename = register(new StringSetting("YTRename", "%(title)s-%(id)s.%(ext)s", "Don't touch if you don't know what you're doing."));
     // ** M3U8
     private final StringSetting m3Rename = register(new StringSetting("M3U8Rename", "EP %d", "Reset the settings to default state."));
+    // ** Use Cookies
+    private final StringSetting cookiesType = register(new StringSetting("CookiesType", "none", "Use cookies to bypass restrictions or login requirements. Leave none to deactivate. To use type path or name of cookies."));
+
 
     private <T> T register(SettingBase settingBase) {
         settingsMap.put(settingBase.getName().toLowerCase(Locale.ROOT), settingBase);
